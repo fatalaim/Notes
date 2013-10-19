@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/newnotepage"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="1"
+    android:orientation="horizontal" >
+
+    <Spinner
+        android:id="@+id/journalspinner"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="fill_horizontal|top"
+        android:layout_toLeftOf="@+id/addbutton" />
+
+    <EditText
+        android:id="@+id/titletext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/journalspinner"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/journalspinner"
+        android:layout_gravity="fill_horizontal"
+        android:ems="10"
+        android:hint="Note Title"
+        tools:ignore="HardcodedText" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/notetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/journalspinner"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/titletext"
+        android:layout_gravity="fill"
+        android:ems="10"
+        android:hint="Note Text"
+        android:inputType="textMultiLine"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/addbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/journalspinner"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Add Note"
+        tools:ignore="HardcodedText" />
+
+</RelativeLayout>
