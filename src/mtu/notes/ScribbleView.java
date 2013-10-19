@@ -10,46 +10,82 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 public class ScribbleView extends View{
-	private static final float MINP = 0.25f;
+	private static final float MINP = 0.25f; 
     private static final float MAXP = 0.75f;
 
     private Paint       mPaint;
     private Bitmap  mBitmap;
+    private Bitmap  hBitmap;
     private Canvas  mCanvas;
+    private Canvas hCanvas;
     private Path    mPath;
     private Paint   mBitmapPaint;
+    private Paint highlight;
+    Context context;
+    boolean highlighter = false;
+    String text="";
 
     public ScribbleView(Context c) {
         super(c);
+        context = c;
+        this.requestFocus();
+        this.setFocusableInTouchMode(true);
         mPaint = new Paint();
         mPaint.setColor(Color.BLACK);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mPaint.setStrokeWidth(2);
+        mPaint.setStrokeWidth(0);
+        mPaint.setTextSize(30);
+        highlight = new Paint();
+        highlight.setStrokeWidth(20);
+        highlight.setStyle(Paint.Style.STROKE);
+        highlight.setStrokeJoin(Paint.Join.MITER);
+        highlight.setStrokeCap(Paint.Cap.SQUARE);
+        highlight.setColor(Color.YELLOW);
+         
         WindowManager wm = (WindowManager) c.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         mBitmap = Bitmap.createBitmap(display.getWidth(), display.getHeight(), Bitmap.Config.ARGB_8888);
+        hBitmap = Bitmap.createBitmap(display.getWidth(), display.getHeight(), Bitmap.Config.ARGB_8888);
         mCanvas = new Canvas(mBitmap);
+        hCanvas = new Canvas(hBitmap);
         mPath = new Path();
         mBitmapPaint = new Paint(Paint.DITHER_FLAG);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
+    	if(!highlighter)
+        canvas.drawPath(mPath, highlight);
+    	canvas.drawBitmap(hBitmap, 0, 0, mBitmapPaint);
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
-        canvas.drawPath(mPath, mPaint);
+        if (highlighter)
+        canvas.drawPath(mPath,mPaint);
     }
 
     private float mX, mY;
-
+    
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent ev){
+		Log.i(text,"T");
+		invalidate();
+		if (keyCode==KeyEvent.KEYCODE_ENTER)
+			text = "";
+    	return true;
+    }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float x = event.getX();
@@ -57,24 +93,40 @@ public class ScribbleView extends View{
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+            	System.out.println(text);
                 mPath.reset();
                 mPath.moveTo(x, y);
+                if (!highlighter){
+                	//((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
+                	highlighter  = true; 
+                }
+                else{
+                	//((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(getWindowToken(), 0);
+                	highlighter = false;
+                }
+                if (highlighter)
+                mCanvas.drawPath(mPath,mPaint);
+                else
+                hCanvas.drawPath(mPath,highlight);
                 mX = x;
                 mY = y;
                 invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
                 mPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);
-                mX = x;
+            	mX = x;
                 mY = y;
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
+            	if (highlighter)
                 mCanvas.drawPath(mPath, mPaint);
+            	else
+            	hCanvas.drawPath(mPath, highlight);
                 mPath.reset();
                 invalidate();
                 break;
         }
         return true;
-    }
+    }   
 }
