@@ -22,6 +22,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="mtu.notes.NewNoteActivity"
+            android:label="@string/title_activity_new_note"
+            android:parentActivityName="mtu.notes.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mtu.notes.MainActivity" />
+        </activity>
+        <activity
+            android:name="mtu.notes.JournalViewActivity"
+            android:label="@string/title_activity_journal_view"
+            android:parentActivityName="mtu.notes.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mtu.notes.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
