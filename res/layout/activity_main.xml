@@ -25,6 +25,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
         android:text="New Note"
+        android:onClick="newNote"
         tools:ignore="HardcodedText" />
 
     <Button
@@ -34,6 +35,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/journals"
+        android:onClick="journalView"
         tools:ignore="HardcodedText" />
 
 </RelativeLayout>

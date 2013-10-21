@@ -25,5 +25,17 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	public void newNote(View view)
+	{
+		Intent intent = new Intent(this, NewNoteActivity.class);
+		startActivity(intent);
+	}
+	
+	public void journalView(View view)
+	{
+		Intent intent = new Intent(this, JournalViewActivity.class);
+		startActivity(intent);
+	}
 
 }
