@@ -12,6 +12,7 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
@@ -36,9 +37,24 @@ public class ScribbleView extends View{
     Context context;
     boolean highlighter = false;
     String text="";
+    int height = 500;
+    int width = 500;
 
-    public ScribbleView(Context c) {
-        super(c);
+    public ScribbleView(Context c){
+    	super(c);
+    	init(c);
+    }
+    public ScribbleView(Context c, AttributeSet at){
+    	this(c, at,0);
+    	init(c);
+    }
+    
+    public ScribbleView(Context c, AttributeSet at, int defStyle){
+    	super(c,at,defStyle);
+    	init(c);
+    }
+    
+    public  void init(Context c) {
         context = c;
         this.requestFocus();
         this.setFocusableInTouchMode(true);
@@ -55,11 +71,8 @@ public class ScribbleView extends View{
         highlight.setStrokeJoin(Paint.Join.MITER);
         highlight.setStrokeCap(Paint.Cap.SQUARE);
         highlight.setColor(Color.YELLOW);
-         
-        WindowManager wm = (WindowManager) c.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        mBitmap = Bitmap.createBitmap(display.getWidth(), display.getHeight(), Bitmap.Config.ARGB_8888);
-        hBitmap = Bitmap.createBitmap(display.getWidth(), display.getHeight(), Bitmap.Config.ARGB_8888);
+        mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        hBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         mCanvas = new Canvas(mBitmap);
         hCanvas = new Canvas(hBitmap);
         mPath = new Path();
