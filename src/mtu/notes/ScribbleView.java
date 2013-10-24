@@ -1,26 +1,16 @@
 package mtu.notes;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Point;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Display;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 
 public class ScribbleView extends View{
 	private static final float MINP = 0.25f; 
@@ -77,6 +67,10 @@ public class ScribbleView extends View{
         hCanvas = new Canvas(hBitmap);
         mPath = new Path();
         mBitmapPaint = new Paint(Paint.DITHER_FLAG);
+    }
+    
+    public void Save(View view) {
+    	
     }
 
     @Override

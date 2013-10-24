@@ -21,21 +21,31 @@
         android:id="@+id/newnote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/journal"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:text="New Note"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="78dp"
         android:onClick="newNote"
+        android:text="New Note"
         tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/journal"
+        android:layout_alignRight="@+id/textView1"
+        android:text="Add Scribble"
+        android:onClick="newHandnote" />
 
     <Button
         android:id="@+id/journal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/journals"
+        android:layout_below="@+id/newnote"
+        android:layout_marginTop="79dp"
+        android:layout_toRightOf="@+id/newnote"
         android:onClick="journalView"
+        android:text="@string/journals"
         tools:ignore="HardcodedText" />
 
 </RelativeLayout>

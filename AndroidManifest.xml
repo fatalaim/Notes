@@ -38,6 +38,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="mtu.notes.MainActivity" />
         </activity>
+        <activity
+            android:name="mtu.notes.HandnoteActivity"
+            android:label="@string/title_activity_handnote"
+            android:parentActivityName="mtu.notes.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mtu.notes.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
