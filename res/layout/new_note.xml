@@ -49,6 +49,7 @@
         android:layout_alignBottom="@+id/journalspinner"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="@string/addnote" />
+        android:text="@string/addnote"
+        android:onClick="save" />
 
 </RelativeLayout>

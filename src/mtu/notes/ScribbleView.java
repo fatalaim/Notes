@@ -74,19 +74,24 @@ public class ScribbleView extends View{
 		mBitmapPaint = new Paint(Paint.DITHER_FLAG);
 	}
 
-	public void Save() {
-		EditText editText = (EditText) findViewById(R.id.editText1);
-		if(editText != null)
+	public void Save(EditText editText) {
+		if(!editText.getText().toString().isEmpty())
 		{
-			String filename = editText.getText().toString();
-			if(!filename.isEmpty()) {
-				try {
-					FileOutputStream out = new FileOutputStream(filename);
-					mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
-					out.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			int count = -1;
+			String filename = editText.getText().toString() + ".png";
+			File file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
+			while(file.exists())
+			{
+				count++;
+				filename = editText.getText().toString() + count + ".png";
+				file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
+			}
+			try {
+				FileOutputStream out = new FileOutputStream(file);
+				mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+				out.close();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 		else
@@ -100,7 +105,7 @@ public class ScribbleView extends View{
 				filename = "note" + count + ".png";
 				file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
 			}
-			
+
 			try {
 				FileOutputStream out = new FileOutputStream(file);
 				mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);

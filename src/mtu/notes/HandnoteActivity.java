@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
@@ -65,7 +66,7 @@ public class HandnoteActivity extends Activity {
 	public void save(View view)
 	{
 		ScribbleView scribble = (ScribbleView) findViewById(R.id.scribbleView1);
-		scribble.Save();
+		scribble.Save((EditText)findViewById(R.id.editText1));
 	}
 
 }

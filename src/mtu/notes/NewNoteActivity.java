@@ -1,10 +1,16 @@
 package mtu.notes;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
@@ -18,7 +24,7 @@ public class NewNoteActivity extends Activity {
 		setContentView(R.layout.new_note);
 		Spinner spinner = (Spinner) findViewById(R.id.journalspinner);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-		        R.array.planets_array, android.R.layout.simple_spinner_item);
+				R.array.planets_array, android.R.layout.simple_spinner_item);
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
@@ -59,6 +65,53 @@ public class NewNoteActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	public void save(View view)
+	{
+		EditText text = (EditText) findViewById(R.id.notetext);
+		if(text != null) {
+			EditText editText = (EditText)findViewById(R.id.titletext);
+			if(!editText.getText().toString().isEmpty())
+			{
+				int count = -1;
+				String filename = editText.getText().toString() + ".txt";
+				File file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
+				while(file.exists())
+				{
+					count++;
+					filename = editText.getText().toString() + count + ".txt";
+					file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
+				}
+				try {
+					FileOutputStream out = new FileOutputStream(file);
+					out.write(text.getText().toString().getBytes());
+					out.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			else
+			{
+				int count = 0;
+				String filename = "note" + count + ".txt";
+				File file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
+				while(file.exists())
+				{
+					count++;
+					filename = "note" + count + ".txt";
+					file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
+				}
+
+				try {
+					FileOutputStream out = new FileOutputStream(file);
+					out.write(text.getText().toString().getBytes());
+					out.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 }
