@@ -8,5 +8,18 @@
     <string name="title_activity_new_note">NewNote</string>
     <string name="title_activity_journal_view">JournalView</string>
     <string name="title_activity_handnote">HandnoteActivity</string>
+    <string name="category">Category</string>
+    <string name="addnote">Add Note</string>
+    <string name="edittitle">Edit Title</string>
+    <string name="addscribble">New Scribble</string>
+    <string name="notetitle">Note Title</string>
+    <string name="notetext">Note Text</string>
+    <string name="newnote">New Note</string>
 
+    <string-array name="planets_array">
+        <item>Team Software</item>
+        <item>Concurrent</item>
+        <item>Formal Models</item>
+    </string-array>
+    
 </resources>

@@ -25,8 +25,7 @@
         android:layout_below="@+id/textView1"
         android:layout_marginTop="78dp"
         android:onClick="newNote"
-        android:text="New Note"
-        tools:ignore="HardcodedText" />
+        android:text="@string/newnote" />
 
     <Button
         android:id="@+id/button1"
@@ -34,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/journal"
         android:layout_alignRight="@+id/textView1"
-        android:text="Add Scribble"
+        android:text="@string/addscribble"
         android:onClick="newHandnote" />
 
     <Button

@@ -25,11 +25,9 @@
         android:layout_below="@+id/journalspinner"
         android:layout_gravity="fill_horizontal"
         android:ems="10"
-        android:hint="Note Title"
-        tools:ignore="HardcodedText" >
+        android:hint="@string/notetitle" />
 
         <requestFocus />
-    </EditText>
 
     <EditText
         android:id="@+id/notetext"
@@ -41,9 +39,8 @@
         android:layout_below="@+id/titletext"
         android:layout_gravity="fill"
         android:ems="10"
-        android:hint="Note Text"
-        android:inputType="textMultiLine"
-        tools:ignore="HardcodedText" />
+        android:hint="@string/notetext"
+        android:inputType="textMultiLine" />
 
     <Button
         android:id="@+id/addbutton"
@@ -52,7 +49,6 @@
         android:layout_alignBottom="@+id/journalspinner"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="Add Note"
-        tools:ignore="HardcodedText" />
+        android:text="@string/addnote" />
 
 </RelativeLayout>
