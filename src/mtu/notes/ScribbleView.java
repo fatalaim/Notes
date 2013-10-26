@@ -75,6 +75,10 @@ public class ScribbleView extends View{
 	}
 
 	public void Save(EditText editText) {
+		Bitmap finBit = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		Canvas fin = new Canvas(finBit);
+		fin.drawBitmap(hBitmap, 0, 0, mBitmapPaint);
+		fin.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
 		if(!editText.getText().toString().isEmpty())
 		{
 			int count = -1;
@@ -88,7 +92,7 @@ public class ScribbleView extends View{
 			}
 			try {
 				FileOutputStream out = new FileOutputStream(file);
-				mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+				finBit.compress(Bitmap.CompressFormat.PNG, 90, out);
 				out.close();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -108,7 +112,7 @@ public class ScribbleView extends View{
 
 			try {
 				FileOutputStream out = new FileOutputStream(file);
-				mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+				finBit.compress(Bitmap.CompressFormat.PNG, 90, out);
 				out.close();
 			} catch (Exception e) {
 				e.printStackTrace();
