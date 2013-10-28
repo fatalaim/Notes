@@ -15,6 +15,7 @@
     <string name="notetitle">Note Title</string>
     <string name="notetext">Note Text</string>
     <string name="newnote">New Note</string>
+    <string name="newcat">New Category</string>
 
     <string-array name="planets_array">
         <item>Team Software</item>
