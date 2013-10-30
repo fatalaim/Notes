@@ -16,4 +16,18 @@
         android:onClick="newCategory"
         android:text="@string/newcat" />
 
+    <EditText
+        android:id="@+id/journalName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/newcat"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/newcat"
+        android:layout_marginTop="39dp"
+        android:hint="@string/journalName"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
 </RelativeLayout>

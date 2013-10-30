@@ -4,8 +4,12 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.os.Build;
 
 public class JournalViewActivity extends Activity {
@@ -52,4 +56,21 @@ public class JournalViewActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	public void newCategory(View view)
+	{
+		EditText editText = (EditText) findViewById(R.id.journalName);
+		if (editText.getText().toString().isEmpty())
+		{
+			Context context = getApplicationContext();
+			CharSequence text = "No journal name.";
+			int duration = Toast.LENGTH_SHORT;
+
+			Toast toast = Toast.makeText(context, text, duration);
+			toast.show();
+		}
+		else
+		{
+			//check if journal name folder exist. if so, toast journal already exists. if not, create and toast that it was created
+		}
+	}
 }
