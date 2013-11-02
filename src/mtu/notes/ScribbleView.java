@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -49,6 +50,14 @@ public class ScribbleView extends View{
 		init(c);
 	}
 
+	public void highlightColor(int color){
+		highlight.setColor(color);
+	}
+	
+	public void penColor(int color){
+		mPaint.setColor(color);
+	}
+	
 	public  void init(Context c) {
 		context = c;
 		this.requestFocus();
@@ -72,6 +81,15 @@ public class ScribbleView extends View{
 		hCanvas = new Canvas(hBitmap);
 		mPath = new Path();
 		mBitmapPaint = new Paint(Paint.DITHER_FLAG);
+	}
+	
+	public void toggleHighlight(){
+		if (!highlighter){
+			highlighter  = true; 
+		}
+		else{
+			highlighter = false;
+		}
 	}
 
 	public void Save(EditText editText) {
@@ -119,6 +137,16 @@ public class ScribbleView extends View{
 			}
 		}
 	}
+	
+	public void load(String filename){
+		File file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
+		Bitmap loaded = Bitmap.createBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
+		mBitmap = loaded.copy(Bitmap.Config.ARGB_8888, true);
+		hBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		invalidate();
+		mCanvas = new Canvas(mBitmap);
+		hCanvas = new Canvas(hBitmap);
+	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -129,6 +157,7 @@ public class ScribbleView extends View{
 		if (highlighter)
 			canvas.drawPath(mPath,mPaint);
 	}
+	
 
 	private float mX, mY;
 
@@ -150,14 +179,6 @@ public class ScribbleView extends View{
 			System.out.println(text);
 			mPath.reset();
 			mPath.moveTo(x, y);
-			if (!highlighter){
-				//((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
-				highlighter  = true; 
-			}
-			else{
-				//((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(getWindowToken(), 0);
-				highlighter = false;
-			}
 			if (highlighter)
 				mCanvas.drawPath(mPath,mPaint);
 			else
