@@ -44,4 +44,10 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, HandnoteActivity.class);
 		startActivity(intent);
 	}
+	
+	public void loadScribble(View view)
+	{
+		Intent intent = new Intent(this,LoadScribble.class);
+		startActivity(intent);
+	}
 }

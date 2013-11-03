@@ -33,8 +33,8 @@ public class ScribbleView extends View{
 	Context context;
 	boolean highlighter = false;
 	String text="";
-	int height = 500;
-	int width = 500;
+	int height = 400;
+	int width = 5000;
 
 	public ScribbleView(Context c){
 		super(c);
@@ -139,7 +139,7 @@ public class ScribbleView extends View{
 	}
 	
 	public void load(String filename){
-		File file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
+		File file = new File(filename);
 		Bitmap loaded = Bitmap.createBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
 		mBitmap = loaded.copy(Bitmap.Config.ARGB_8888, true);
 		hBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);

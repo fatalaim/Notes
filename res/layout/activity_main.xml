@@ -40,11 +40,20 @@
         android:id="@+id/journal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/newnote"
         android:layout_below="@+id/newnote"
-        android:layout_marginTop="79dp"
-        android:layout_toRightOf="@+id/newnote"
+        android:layout_marginTop="73dp"
         android:onClick="journalView"
         android:text="@string/journals"
         tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/journal"
+        android:layout_alignLeft="@+id/button1"
+        android:text="Load Scribble" 
+        android:onClick="loadScribble"/>
 
 </RelativeLayout>
