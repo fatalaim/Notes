@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/journal"
         android:layout_alignLeft="@+id/button1"
-        android:text="Load Scribble" 
+        android:text="@string/loadscribble" 
         android:onClick="loadScribble"/>
 
 </RelativeLayout>
