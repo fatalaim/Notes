@@ -1,6 +1,9 @@
 package mtu.notes;
 
+import java.io.File;
+
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,6 +74,17 @@ public class JournalViewActivity extends Activity {
 		else
 		{
 			//check if journal name folder exist. if so, toast journal already exists. if not, create and toast that it was created
+			File folder = new File(Environment.getExternalStorageDirectory() + "/" + editText.getText().toString());
+		    boolean success = true;
+		    if (!folder.exists()) {
+		        //Toast.makeText(MainActivity.this, "Directory Does Not Exist, Create It", Toast.LENGTH_SHORT).show();
+		        success = folder.mkdir();
+		    }
+		    if (success) {
+		        //Toast.makeText(MainActivity.this, "Directory Created", Toast.LENGTH_SHORT).show();
+		    } else {
+		        //Toast.makeText(MainActivity.this, "Failed - Error", Toast.LENGTH_SHORT).show();
+		    }
 		}
 	}
 }

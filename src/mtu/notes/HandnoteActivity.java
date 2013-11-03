@@ -66,7 +66,7 @@ public class HandnoteActivity extends Activity {
 	public void save(View view)
 	{
 		ScribbleView scribble = (ScribbleView) findViewById(R.id.scribbleView1);
-		scribble.Save((EditText)findViewById(R.id.editText1));
+		scribble.Save((EditText)findViewById(R.id.editText1),getApplicationContext());
 	}
 
 }

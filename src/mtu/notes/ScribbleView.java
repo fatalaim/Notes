@@ -17,6 +17,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ScribbleView extends View{
 	private static final float MINP = 0.25f; 
@@ -92,7 +93,7 @@ public class ScribbleView extends View{
 		}
 	}
 
-	public void Save(EditText editText) {
+	public void Save(EditText editText, Context context) {
 		Bitmap finBit = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		Canvas fin = new Canvas(finBit);
 		fin.drawBitmap(hBitmap, 0, 0, mBitmapPaint);
@@ -112,6 +113,11 @@ public class ScribbleView extends View{
 				FileOutputStream out = new FileOutputStream(file);
 				finBit.compress(Bitmap.CompressFormat.PNG, 90, out);
 				out.close();
+				CharSequence toastText = filename + " saved.";
+				int duration = Toast.LENGTH_SHORT;
+
+				Toast toast = Toast.makeText(context, toastText, duration);
+				toast.show();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -132,6 +138,11 @@ public class ScribbleView extends View{
 				FileOutputStream out = new FileOutputStream(file);
 				finBit.compress(Bitmap.CompressFormat.PNG, 90, out);
 				out.close();
+				CharSequence toastText = filename + " saved.";
+				int duration = Toast.LENGTH_SHORT;
+
+				Toast toast = Toast.makeText(context, toastText, duration);
+				toast.show();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

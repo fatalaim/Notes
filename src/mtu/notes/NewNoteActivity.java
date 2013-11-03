@@ -12,8 +12,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.os.Build;
 
 public class NewNoteActivity extends Activity {
@@ -87,6 +89,12 @@ public class NewNoteActivity extends Activity {
 					FileOutputStream out = new FileOutputStream(file);
 					out.write(text.getText().toString().getBytes());
 					out.close();
+					Context context = getApplicationContext();
+					CharSequence toastText = filename + " saved.";
+					int duration = Toast.LENGTH_SHORT;
+
+					Toast toast = Toast.makeText(context, toastText, duration);
+					toast.show();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -107,6 +115,12 @@ public class NewNoteActivity extends Activity {
 					FileOutputStream out = new FileOutputStream(file);
 					out.write(text.getText().toString().getBytes());
 					out.close();
+					Context context = getApplicationContext();
+					CharSequence toastText = filename + " saved.";
+					int duration = Toast.LENGTH_SHORT;
+
+					Toast toast = Toast.makeText(context, toastText, duration);
+					toast.show();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
