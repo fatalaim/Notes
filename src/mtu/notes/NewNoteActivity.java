@@ -46,10 +46,7 @@ public class NewNoteActivity extends Activity {
 				e.printStackTrace();
 			}
 		}
-		else
-		{
-			list.add("None");
-		}
+		list.add("None");
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, list);
 		// Specify the layout to use when the list of choices appears
