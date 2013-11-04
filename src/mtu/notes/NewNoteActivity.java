@@ -2,6 +2,9 @@ package mtu.notes;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.LineNumberReader;
+import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.os.Environment;
@@ -25,8 +28,30 @@ public class NewNoteActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_note);
 		Spinner spinner = (Spinner) findViewById(R.id.journalspinner);
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-				R.array.planets_array, android.R.layout.simple_spinner_item);
+		
+		ArrayList<String> list = new ArrayList<String>();
+		File file = new File(Environment.getExternalStorageDirectory() + "/category.txt");
+		if(file.exists())
+		{
+			String read;
+			try {
+				LineNumberReader in = new LineNumberReader(new FileReader(Environment.getExternalStorageDirectory() +"/category.txt"));
+				while((read = in.readLine()) != null)
+				{
+					System.out.println(read);
+					list.add(read);
+				}
+				in.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			list.add("None");
+		}
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, list);
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner

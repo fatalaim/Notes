@@ -1,6 +1,7 @@
 package mtu.notes;
 
 import java.io.File;
+import java.io.FileOutputStream;
 
 import android.os.Bundle;
 import android.os.Environment;
@@ -75,16 +76,44 @@ public class JournalViewActivity extends Activity {
 		{
 			//check if journal name folder exist. if so, toast journal already exists. if not, create and toast that it was created
 			File folder = new File(Environment.getExternalStorageDirectory() + "/" + editText.getText().toString());
-		    boolean success = true;
-		    if (!folder.exists()) {
-		        //Toast.makeText(MainActivity.this, "Directory Does Not Exist, Create It", Toast.LENGTH_SHORT).show();
-		        success = folder.mkdir();
-		    }
-		    if (success) {
-		        //Toast.makeText(MainActivity.this, "Directory Created", Toast.LENGTH_SHORT).show();
-		    } else {
-		        //Toast.makeText(MainActivity.this, "Failed - Error", Toast.LENGTH_SHORT).show();
-		    }
+			boolean success;
+			if (!folder.exists()) {
+				success = folder.mkdir();
+				if (success) {
+					Toast.makeText(getApplicationContext(), "Directory Created", Toast.LENGTH_SHORT).show();
+					String msg = editText.getText().toString() + "\n";
+					//Write folder/journal name to file to load journals later.
+					File file = new File(Environment.getExternalStorageDirectory() + "/category.txt");
+					if(file.exists())
+					{
+						try
+						{
+							FileOutputStream out = new FileOutputStream(file,true);
+							out.write(msg.getBytes());
+							out.close();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+					else
+					{
+						try
+						{
+							FileOutputStream out = new FileOutputStream(file);
+							out.write(msg.getBytes());
+							out.close();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				} else {
+					Toast.makeText(getApplicationContext(), "Failed - Error", Toast.LENGTH_SHORT).show();
+				}
+			}
+			else
+			{
+				Toast.makeText(getApplicationContext(), "Folder Already Exists", Toast.LENGTH_SHORT).show();
+			}
 		}
 	}
 }
