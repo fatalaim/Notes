@@ -90,7 +90,7 @@ public class HandnoteActivity extends Activity {
 	public void save(View view)
 	{
 		ScribbleView scribble = (ScribbleView) findViewById(R.id.scribbleView1);
-		scribble.Save((EditText)findViewById(R.id.editText1),getApplicationContext());
+		scribble.Save((EditText)findViewById(R.id.editText1),(Spinner)findViewById(R.id.spinner1),getApplicationContext());
 	}
 
 }

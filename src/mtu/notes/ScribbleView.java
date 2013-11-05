@@ -17,6 +17,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class ScribbleView extends View{
@@ -93,7 +94,7 @@ public class ScribbleView extends View{
 		}
 	}
 
-	public void Save(EditText editText, Context context) {
+	public void Save(EditText editText, Spinner cat, Context context) {
 		Bitmap finBit = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		Canvas fin = new Canvas(finBit);
 		fin.drawBitmap(hBitmap, 0, 0, mBitmapPaint);
@@ -102,7 +103,16 @@ public class ScribbleView extends View{
 		{
 			int count = -1;
 			String filename = editText.getText().toString() + ".png";
-			File file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
+			String path;
+			if(cat.getSelectedItem().toString().equals("None"))
+			{
+				path = Environment.getExternalStorageDirectory().getPath();
+			}
+			else
+			{
+				path = Environment.getExternalStorageDirectory().getPath() + "/" + cat.getSelectedItem().toString();
+			}
+			File file = new File(path, filename);
 			while(file.exists())
 			{
 				count++;
