@@ -61,7 +61,7 @@ public class ImportPdfActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	    if (requestCode == LOAD_REQUEST) {
 	        if (resultCode == RESULT_OK) {
-	        	//Handle file
+	        	
 	        }
 	    }
 	}
