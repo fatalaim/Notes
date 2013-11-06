@@ -26,4 +26,7 @@
         <item>Formal Models</item>
     </string-array>
 
+    <string name="importpdf">Import PDF</string>
+    <string name="title_activity_import_pdf">ImportPDF</string>
+
 </resources>

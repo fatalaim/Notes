@@ -14,6 +14,7 @@ import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 
 public class JournalViewActivity extends Activity {
@@ -115,5 +116,11 @@ public class JournalViewActivity extends Activity {
 				Toast.makeText(getApplicationContext(), "Folder Already Exists", Toast.LENGTH_SHORT).show();
 			}
 		}
+	}
+	
+	public void importPDF(View view)
+	{
+		Intent intent = new Intent(this,ImportPdfActivity.class);
+		startActivity(intent);
 	}
 }

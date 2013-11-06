@@ -8,14 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".JournalViewActivity" >
 
-    <Button
-        android:id="@+id/newcat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="78dp"
-        android:onClick="newCategory"
-        android:text="@string/newcat" />
-
     <EditText
         android:id="@+id/journalName"
         android:layout_width="wrap_content"
@@ -29,5 +21,23 @@
 
         <requestFocus />
     </EditText>
+
+    <Button
+        android:id="@+id/newcat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/journalName"
+        android:layout_centerHorizontal="true"
+        android:onClick="newCategory"
+        android:text="@string/newcat" />
+
+    <Button
+        android:id="@+id/importPdf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/importpdf"
+        android:onClick="importPDF" />
 
 </RelativeLayout>

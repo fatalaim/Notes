@@ -52,6 +52,14 @@
             android:name="mtu.notes.LoadScribble"
             android:label="@string/title_activity_load_scribble" >
         </activity>
+        <activity
+            android:name="mtu.notes.ImportPdfActivity"
+            android:label="@string/title_activity_import_pdf"
+            android:parentActivityName="mtu.notes.JournalViewActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mtu.notes.JournalViewActivity" />
+        </activity>
     </application>
 
 </manifest>
