@@ -18,7 +18,7 @@ import org.jpedal.fonts.FontMappings;
 
 public class PDFtoBMP {
 
-	public PDFtoBMP(String fileName, String filePath){
+	public PDFtoBMP(String fileName, String filePath, String category){
 		//Instance of PdfDecoder to convert PDF into image
 		PdfDecoder decodePdf = new PdfDecoder(true);
 		//set mappings for non-embedded fonts to use
@@ -33,24 +33,43 @@ public class PDFtoBMP {
 				images [i - 1] = decodePdf.getPageAsImage(i);
 			}
 			//Saves the images to a folder
-			File dir = new File(fileName);
-			dir.mkdir();
-			for (int i = 0; i < decodePdf.getPageCount() ; i++) {
-				try {
-					File temp = new File(dir, fileName + "_page_" + (i + 1) + ".bmp");
-					ImageIO.write(images[i], "bmp", temp);
-					
-				} catch (IOException e) {
-					e.printStackTrace();
+			if (category.isEmpty()) {
+
+
+				File dir = new File(fileName);
+				dir.mkdir();
+				for (int i = 0; i < decodePdf.getPageCount() ; i++) {
+					try {
+						File temp = new File(dir, fileName + "_page_" + (i + 1) + ".bmp");
+						ImageIO.write(images[i], "bmp", temp);
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
+				//Close the file
+				decodePdf.closePdfFile();
 			}
-			//Close the file
-			decodePdf.closePdfFile();
+			else {
+				File dir = new File(category);
+				dir.mkdir();
+				for (int i = 0; i < decodePdf.getPageCount() ; i++) {
+					try {
+						File temp = new File(dir, fileName + "_page_" + (i + 1) + ".bmp");
+						ImageIO.write(images[i], "bmp", temp);
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				//Close the file
+				decodePdf.closePdfFile();
+			}
 		} 
 		catch (PdfException e) {
 			e.printStackTrace();
 		} 
 	}
-	
-	
+
+
 }
