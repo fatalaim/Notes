@@ -94,13 +94,23 @@ public class NewNoteActivity extends Activity {
 	public void save(View view)
 	{
 		EditText text = (EditText) findViewById(R.id.notetext);
+		Spinner cat = (Spinner) findViewById(R.id.journalspinner);
 		if(text != null) {
 			EditText editText = (EditText)findViewById(R.id.titletext);
 			if(!editText.getText().toString().isEmpty())
 			{
 				int count = -1;
 				String filename = editText.getText().toString() + ".txt";
-				File file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
+				String path;
+				if(cat.getSelectedItem().toString().equals("None"))
+				{
+					path = Environment.getExternalStorageDirectory().getPath();
+				}
+				else
+				{
+					path = Environment.getExternalStorageDirectory().getPath() + "/" + cat.getSelectedItem().toString();
+				}
+				File file = new File(path, filename);
 				while(file.exists())
 				{
 					count++;
