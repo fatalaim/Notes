@@ -1,9 +1,18 @@
 package mtu.notes;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.LineNumberReader;
+import java.util.ArrayList;
+
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -18,6 +27,33 @@ public class ImportPdfActivity extends Activity {
 		setContentView(R.layout.import_pdf);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		//Load spinner here
+		Spinner spinner = (Spinner) findViewById(R.id.pdfSpinner);
+		
+		ArrayList<String> list = new ArrayList<String>();
+		File file = new File(Environment.getExternalStorageDirectory() + "/category.txt");
+		if(file.exists())
+		{
+			String read;
+			try {
+				LineNumberReader in = new LineNumberReader(new FileReader(Environment.getExternalStorageDirectory() +"/category.txt"));
+				while((read = in.readLine()) != null)
+				{
+					System.out.println(read);
+					list.add(read);
+				}
+				in.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		list.add("None");
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, list);
+		// Specify the layout to use when the list of choices appears
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		// Apply the adapter to the spinner
+		spinner.setAdapter(adapter);
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_GET_CONTENT);
 		intent.setType("file/*");
@@ -61,8 +97,13 @@ public class ImportPdfActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	    if (requestCode == LOAD_REQUEST) {
 	        if (resultCode == RESULT_OK) {
-	        	
+	        	//set textview to pdf filename
 	        }
 	    }
+	}
+	
+	public void importPDF(View view)
+	{
+		//import pdf here
 	}
 }

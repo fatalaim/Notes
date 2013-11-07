@@ -19,6 +19,7 @@
     <string name="newcat">New Category</string>
     <string name="journalName">Journal Name</string>
     <string name="loadscribble">Load Scribble</string>
+    <string name="addpdf">Import PDF</string>
 
     <string-array name="planets_array">
         <item>Team Software</item>
