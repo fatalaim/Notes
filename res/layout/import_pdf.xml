@@ -8,28 +8,32 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ImportPdfActivity" >
 
-    <TextView
-        android:id="@+id/pdfName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-    
-    <Spinner
-        android:id="@+id/pdfSpinner"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="fill_horizontal|top"
-        android:layout_above="@+id/pdfName" />
-    
     <Button
         android:id="@+id/addPdf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pdfName"
-        android:text="@string/addpdf"
-        android:onClick="importPDF" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+        android:onClick="importPDF"
+        android:text="@string/addpdf" />
+
+    <TextView
+        android:id="@+id/pdfname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/addPdf"
+        android:layout_alignLeft="@+id/addPdf"
+        android:layout_alignRight="@+id/addPdf"
+        android:layout_marginBottom="57dp"
+        android:text="@string/pdfname" />
+
+    <Spinner
+        android:id="@+id/importSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pdfname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp" />
 
 </RelativeLayout>

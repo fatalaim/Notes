@@ -24,7 +24,7 @@ public class HandnoteActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_handnote);
-		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+		Spinner spinner = (Spinner) findViewById(R.id.importSpinner);
 		ArrayList<String> list = new ArrayList<String>();
 		File file = new File(Environment.getExternalStorageDirectory() + "/category.txt");
 		if(file.exists())
@@ -90,7 +90,7 @@ public class HandnoteActivity extends Activity {
 	public void save(View view)
 	{
 		ScribbleView scribble = (ScribbleView) findViewById(R.id.scribbleView1);
-		scribble.Save((EditText)findViewById(R.id.editText1),(Spinner)findViewById(R.id.spinner1),getApplicationContext());
+		scribble.Save((EditText)findViewById(R.id.editText1),(Spinner)findViewById(R.id.importSpinner),getApplicationContext());
 	}
 
 }

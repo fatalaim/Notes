@@ -29,5 +29,6 @@
 
     <string name="importpdf">Import PDF</string>
     <string name="title_activity_import_pdf">ImportPDF</string>
+    <string name="pdfname">PDF Name</string>
 
 </resources>

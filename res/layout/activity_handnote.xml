@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <Spinner
-        android:id="@+id/spinner1"
+        android:id="@+id/importSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -16,7 +16,7 @@
         android:id="@+id/importPdf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/spinner1"
+        android:layout_alignBottom="@+id/importSpinner"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="@string/addnote"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/spinner1"
+        android:layout_below="@+id/importSpinner"
         android:layout_gravity="fill_horizontal"
         android:ems="10"
         android:hint="@string/notetitle" />

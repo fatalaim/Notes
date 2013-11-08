@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
@@ -28,7 +29,7 @@ public class ImportPdfActivity extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 		//Load spinner here
-		Spinner spinner = (Spinner) findViewById(R.id.pdfSpinner);
+		Spinner spinner = (Spinner) findViewById(R.id.importSpinner);
 		
 		ArrayList<String> list = new ArrayList<String>();
 		File file = new File(Environment.getExternalStorageDirectory() + "/category.txt");
@@ -97,7 +98,8 @@ public class ImportPdfActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	    if (requestCode == LOAD_REQUEST) {
 	        if (resultCode == RESULT_OK) {
-	        	//set textview to pdf filename
+	        	EditText editText = (EditText)findViewById(R.id.pdfname);
+	        	editText.setText(data.getDataString().substring(7));
 	        }
 	    }
 	}

@@ -7,7 +7,7 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/pdfname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -21,8 +21,8 @@
         android:id="@+id/newnote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/pdfname"
+        android:layout_below="@+id/pdfname"
         android:layout_marginTop="78dp"
         android:onClick="newNote"
         android:text="@string/newnote" />
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/journal"
-        android:layout_alignRight="@+id/textView1"
+        android:layout_alignRight="@+id/pdfname"
         android:text="@string/addscribble"
         android:onClick="newHandnote" />
 
