@@ -1,55 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/newnotepage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="1"
-    android:orientation="horizontal" >
+    android:orientation="vertical" >
 
-    <Spinner
-        android:id="@+id/journalspinner"
-        android:layout_width="150dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="fill_horizontal|top"
-        android:layout_toLeftOf="@+id/addbutton" />
+        android:orientation="horizontal" >
 
-    <EditText
-        android:id="@+id/titletext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/journalspinner"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/journalspinner"
-        android:layout_gravity="fill_horizontal"
-        android:ems="10"
-        android:hint="@string/notetitle" />
+        <Spinner
+            android:id="@+id/journalspinner"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight=".60" />
+
+        <Button
+            android:id="@+id/addbutton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight=".40"
+            android:text="@string/addnote" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <EditText
+            android:id="@+id/editTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:ems="10"
+            android:hint="@string/notetitle" />
 
         <requestFocus />
 
-    <EditText
-        android:id="@+id/notetext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/journalspinner"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/titletext"
-        android:layout_gravity="fill"
-        android:ems="10"
-        android:hint="@string/notetext"
-        android:inputType="textMultiLine" />
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editTitle"
+            android:ems="10"
+            android:hint="@string/notetext"
+            android:inputType="textMultiLine" />
 
-    <Button
-        android:id="@+id/addbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/journalspinner"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/addnote"
-        android:onClick="save" />
+        <SlidingDrawer
+            android:id="@+id/slidingDrawer"
+            android:layout_width="200dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/editText1"
+            android:content="@+id/content"
+            android:handle="@+id/handle"
+            android:orientation="horizontal" >
 
-</RelativeLayout>
+            <ImageButton
+                android:id="@+id/handle"
+                android:src="@drawable/arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@+string/slidingDrawerButton"/>
+
+            <LinearLayout
+                android:id="@id/content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" />
+        </SlidingDrawer>
+    </RelativeLayout>
+
+</LinearLayout>
