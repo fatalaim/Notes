@@ -18,31 +18,11 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/newnote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/pdfname"
-        android:layout_below="@+id/pdfname"
-        android:layout_marginTop="78dp"
-        android:onClick="newNote"
-        android:text="@string/newnote" />
-
-    <Button
-        android:id="@+id/importPdf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/journal"
-        android:layout_alignRight="@+id/pdfname"
-        android:text="@string/addscribble"
-        android:onClick="newHandnote" />
-
-    <Button
         android:id="@+id/journal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/newnote"
-        android:layout_below="@+id/newnote"
-        android:layout_marginTop="73dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:onClick="journalView"
         android:text="@string/journals"
         tools:ignore="HardcodedText" />
@@ -51,9 +31,18 @@
         android:id="@+id/blueHigh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/journal"
-        android:layout_alignLeft="@+id/importPdf"
-        android:text="@string/loadscribble" 
-        android:onClick="loadScribble"/>
+        android:layout_below="@+id/journal"
+        android:layout_centerHorizontal="true"
+        android:onClick="loadScribble"
+        android:text="@string/loadscribble" />
+
+    <Button
+        android:id="@+id/newnote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/journal"
+        android:layout_centerHorizontal="true"
+        android:onClick="newNote"
+        android:text="@string/newnote" />
 
 </RelativeLayout>

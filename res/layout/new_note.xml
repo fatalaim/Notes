@@ -48,7 +48,8 @@
             android:layout_below="@id/titletext"
             android:ems="10"
             android:hint="@string/notetext"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:gravity="top" />
         
         <mtu.notes.ScribbleView
             android:id="@+id/scribbles"
