@@ -39,32 +39,20 @@
 
         <requestFocus />
         
-        <EditText
-            android:id="@+id/notetext"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/titletext"
-            android:ems="10"
-            android:hint="@string/notetext"
-            android:inputType="textMultiLine" />
-        
         <mtu.notes.ScribbleView
-            android:id="@+id/scribbles"
+            android:id="@+id/scribbleView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/titletext" />
-
+            android:layout_below="@id/titletext" />
 
         <SlidingDrawer
             android:id="@+id/slidingDrawer"
             android:layout_width="250dip"
             android:layout_height="fill_parent"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/notetext"
+            android:layout_below="@+id/titletext"
             android:content="@+id/content"
             android:handle="@+id/handle"
             android:orientation="horizontal" >

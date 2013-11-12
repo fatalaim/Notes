@@ -9,13 +9,20 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.SlidingDrawer;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -23,12 +30,42 @@ import android.graphics.Color;
 import android.os.Build;
 
 public class NewNoteActivity extends Activity {
+	
+	private ToggleButton toggle;
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_note);
 		Spinner spinner = (Spinner) findViewById(R.id.journalspinner);
+		
+		//Initially bring the notetext to the front, then put the drawer in front of that
+		EditText notetext = (EditText) findViewById(R.id.notetext);
+		notetext.bringToFront();
+		SlidingDrawer drawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
+		drawer.bringToFront();
+		
+		//When the toggle button is clicked
+		toggle = (ToggleButton) findViewById(R.id.drawToggle);
+		toggle.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				//Bring scribbleView to the front
+				if(toggle.isChecked()){
+					ScribbleView scribbles = (ScribbleView) findViewById(R.id.scribbles);
+					scribbles.bringToFront();
+					SlidingDrawer drawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
+					drawer.bringToFront();
+				}
+				//Bring noteView to the front
+				else{
+					EditText notetext = (EditText) findViewById(R.id.notetext);
+					notetext.bringToFront();
+					SlidingDrawer drawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
+					drawer.bringToFront();
+				}
+			}
+		});
 		
 		ArrayList<String> list = new ArrayList<String>();
 		File file = new File(Environment.getExternalStorageDirectory() + "/category.txt");
@@ -56,6 +93,8 @@ public class NewNoteActivity extends Activity {
 		spinner.setAdapter(adapter);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		
+		
 	}
 
 	/**
