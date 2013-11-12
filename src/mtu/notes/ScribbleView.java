@@ -24,14 +24,14 @@ public class ScribbleView extends View{
 	private static final float MINP = 0.25f; 
 	private static final float MAXP = 0.75f;
 
-	private Paint       mPaint;
+	private static Paint mPaint;
 	private Bitmap  mBitmap;
 	private Bitmap  hBitmap;
 	private Canvas  mCanvas;
 	private Canvas hCanvas;
 	private Path    mPath;
 	private Paint   mBitmapPaint;
-	private Paint highlight;
+	private static Paint highlight;
 	Context context;
 	boolean highlighter = false;
 	String text="";
@@ -52,11 +52,11 @@ public class ScribbleView extends View{
 		init(c);
 	}
 
-	public void highlightColor(int color){
+	public static void highlightColor(int color){
 		highlight.setColor(color);
 	}
 	
-	public void penColor(int color){
+	public static void penColor(int color){
 		mPaint.setColor(color);
 	}
 	

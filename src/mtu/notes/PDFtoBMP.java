@@ -1,18 +1,18 @@
 package mtu.notes;
 
-import java.awt.image.BufferedImage;
+/***import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.jpedal.*;
 import org.jpedal.exception.PdfException;
-import org.jpedal.fonts.FontMappings;
+import org.jpedal.fonts.FontMappings;**/
 
 
 public class PDFtoBMP {
 
-	public PDFtoBMP(String fileName, String filePath, String category){
+	/*public PDFtoBMP(String fileName, String filePath, String category){
 		//Instance of PdfDecoder to convert PDF into image
 		PdfDecoder decodePdf = new PdfDecoder(true);
 		//set mappings for non-embedded fonts to use
@@ -63,7 +63,7 @@ public class PDFtoBMP {
 		catch (PdfException e) {
 			e.printStackTrace();
 		} 
-	}
+	}**/
 
 
 }

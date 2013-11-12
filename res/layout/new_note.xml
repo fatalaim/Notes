@@ -29,7 +29,7 @@
         android:layout_height="fill_parent" >
 
         <EditText
-            android:id="@+id/editTitle"
+            android:id="@+id/titletext"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -38,41 +38,161 @@
             android:hint="@string/notetitle" />
 
         <requestFocus />
-
+        
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/notetext"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/editTitle"
+            android:layout_below="@+id/titletext"
             android:ems="10"
             android:hint="@string/notetext"
             android:inputType="textMultiLine" />
 
         <SlidingDrawer
             android:id="@+id/slidingDrawer"
-            android:layout_width="200dp"
+            android:layout_width="250dip"
             android:layout_height="fill_parent"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/editText1"
+            android:layout_alignTop="@+id/notetext"
             android:content="@+id/content"
             android:handle="@+id/handle"
             android:orientation="horizontal" >
 
             <ImageButton
                 android:id="@+id/handle"
-                android:src="@drawable/arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@+string/slidingDrawerButton"/>
+                android:contentDescription="@+string/slidingDrawerButton"
+                android:src="@drawable/arrow" />
 
             <LinearLayout
                 android:id="@id/content"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:orientation="vertical" />
+                android:orientation="vertical" >
+                
+                <ToggleButton
+                    android:id="@+id/drawToggle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/togglebutton"
+                    android:textOff="Draw"
+                    android:textOn="Type" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/yellowHigh"
+                        android:layout_width="0dip"
+                        android:layout_weight=".50"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yellowh"
+                        android:onClick="highlighterYellow" />
+
+                    <Button
+                        android:id="@+id/blueHigh"
+                        android:layout_width="0dip"
+                        android:layout_weight=".50"
+                        android:layout_height="wrap_content"
+                        android:text="@string/blueh"
+                        android:onClick="highlighterBlue" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/greenHigh"
+                        android:layout_width="0dip"
+                        android:layout_weight=".50"
+                        android:layout_height="wrap_content"
+                        android:text="@string/greenh"
+                        android:onClick="highlighterGreen" />
+
+                    <Button
+                        android:id="@+id/pinkHigh"
+                        android:layout_width="0dip"
+                        android:layout_weight=".50"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pinkh"
+                        android:onClick="highlighterPink" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/blackPen"
+                        android:layout_width="0dip"
+                        android:layout_weight=".50"
+                        android:layout_height="wrap_content"
+                        android:text="@string/blackp"
+                        android:onClick="penBlack" />
+
+                    <Button
+                        android:id="@+id/bluePen"
+                        android:layout_width="0dip"
+                        android:layout_weight=".50"
+                        android:layout_height="wrap_content"
+                        android:text="@string/bluep"
+                        android:onClick="penBlue" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/redPen"
+                        android:layout_width="0dip"
+                        android:layout_weight=".50"
+                        android:layout_height="wrap_content"
+                        android:text="@string/redp"
+                        android:onClick="penRed" />
+
+                    <Button
+                        android:id="@+id/greenPen"
+                        android:layout_width="0dip"
+                        android:layout_weight=".50"
+                        android:layout_height="wrap_content"
+                        android:text="@string/greenp"
+                        android:onClick="penGreen" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/eraserButton"
+                        android:layout_width="0dip"
+                        android:layout_weight=".50"
+                        android:layout_height="wrap_content"
+                        android:text="@string/eraser" />
+
+                    <Button
+                        android:id="@+id/clearButton"
+                        android:layout_width="0dip"
+                        android:layout_weight=".50"
+                        android:layout_height="wrap_content"
+                        android:text="@string/clear" />
+
+                </LinearLayout>
+
+            </LinearLayout>
         </SlidingDrawer>
+
+        
     </RelativeLayout>
 
 </LinearLayout>

@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.LineNumberReader;
 import java.util.ArrayList;
 
-import android.R;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
@@ -19,6 +18,7 @@ import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
+
 
 public class ImportPdfActivity extends Activity {
 

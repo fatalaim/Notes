@@ -19,6 +19,7 @@ import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 
 public class NewNoteActivity extends Activity {
@@ -159,5 +160,41 @@ public class NewNoteActivity extends Activity {
 			}
 		}
 	}
+	
+	public void highlighterYellow(View view){
+		ScribbleView.highlightColor(Color.YELLOW);
+	}
+	
+	public void highlighterBlue(View view){
+		ScribbleView.highlightColor(Color.BLUE);
+	}
+	
+	public void highlighterGreen(View view){
+		ScribbleView.highlightColor(Color.GREEN);
+	}
+	
+	//Maybe or maybe not this one
+	public void highlighterPink(View view){
+		ScribbleView.highlightColor(Color.MAGENTA);
+	}
+	
+	public void penBlack(View view){
+		ScribbleView.penColor(Color.BLACK);
+	}
+	
+	public void penRed(View view){
+		ScribbleView.penColor(Color.RED);
+	}
+	
+	public void penBlue(View view){
+		ScribbleView.penColor(Color.BLUE);
+	}
+	
+	public void penGreen(View view){
+		ScribbleView.penColor(Color.GREEN);
+	}
+	
+	
+	
 
 }

@@ -30,5 +30,18 @@
     <string name="importpdf">Import PDF</string>
     <string name="title_activity_import_pdf">ImportPDF</string>
     <string name="pdfname">PDF Name</string>
+    <string name="togglebutton">ToggleButton</string>
+    <string name="highlighter">Highlighter</string>
+    <string name="pen">Pen</string>
+    <string name="yellowh">YellowH</string>
+    <string name="blueh">BlueH</string>
+    <string name="greenh">GreenH</string>
+    <string name="pinkh">PinkH</string>
+    <string name="blackp">BlackP</string>
+    <string name="bluep">BlueP</string>
+    <string name="redp">RedP</string>
+    <string name="greenp">GreenP</string>
+    <string name="eraser">Eraser</string>
+    <string name="clear">Clear</string>
 
 </resources>
