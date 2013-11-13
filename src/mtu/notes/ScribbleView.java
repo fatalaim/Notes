@@ -55,11 +55,16 @@ public class ScribbleView extends View{
 	public static void highlightColor(int color){
 		highlighter=true;
 		highlight.setColor(color);
+		highlight.setStrokeWidth(20);
 	}
 	
 	public static void penColor(int color){
 		highlighter=false;
 		mPaint.setColor(color);
+	}
+	
+	public static void setWidth(float width){
+		highlight.setStrokeWidth(width);
 	}
 	
 	public  void init(Context c) {

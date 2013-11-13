@@ -43,13 +43,15 @@
             android:id="@+id/notetext"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="8dip"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/titletext"
+            android:background="@android:color/transparent"
             android:ems="10"
+            android:gravity="top"
             android:hint="@string/notetext"
-            android:inputType="textMultiLine"
-            android:gravity="top" />
+            android:inputType="textMultiLine" />
         
         <mtu.notes.ScribbleView
             android:id="@+id/scribbles"

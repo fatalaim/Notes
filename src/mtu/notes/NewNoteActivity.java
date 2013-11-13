@@ -50,18 +50,17 @@ public class NewNoteActivity extends Activity {
 		toggle = (ToggleButton) findViewById(R.id.drawToggle);
 		toggle.setOnClickListener(new OnClickListener(){
 			public void onClick(View v){
+				SlidingDrawer drawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
 				//Bring scribbleView to the front
 				if(toggle.isChecked()){
 					ScribbleView scribbles = (ScribbleView) findViewById(R.id.scribbles);
 					scribbles.bringToFront();
-					SlidingDrawer drawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
 					drawer.bringToFront();
 				}
 				//Bring noteView to the front
 				else{
 					EditText notetext = (EditText) findViewById(R.id.notetext);
 					notetext.bringToFront();
-					SlidingDrawer drawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
 					drawer.bringToFront();
 				}
 			}
