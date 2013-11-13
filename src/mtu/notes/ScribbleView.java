@@ -33,7 +33,7 @@ public class ScribbleView extends View{
 	private Paint   mBitmapPaint;
 	private static Paint highlight;
 	Context context;
-	boolean highlighter = false;
+	static boolean highlighter = false;
 	String text="";
 	int height = 400;
 	int width = 5000;
@@ -53,10 +53,12 @@ public class ScribbleView extends View{
 	}
 
 	public static void highlightColor(int color){
+		highlighter=true;
 		highlight.setColor(color);
 	}
 	
 	public static void penColor(int color){
+		highlighter=false;
 		mPaint.setColor(color);
 	}
 	
@@ -171,11 +173,11 @@ public class ScribbleView extends View{
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		if(!highlighter)
+		if(highlighter)
 			canvas.drawPath(mPath, highlight);
 		canvas.drawBitmap(hBitmap, 0, 0, mBitmapPaint);
 		canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
-		if (highlighter)
+		if (!highlighter)
 			canvas.drawPath(mPath,mPaint);
 	}
 	
@@ -200,7 +202,7 @@ public class ScribbleView extends View{
 			System.out.println(text);
 			mPath.reset();
 			mPath.moveTo(x, y);
-			if (highlighter)
+			if (!highlighter)
 				mCanvas.drawPath(mPath,mPaint);
 			else
 				hCanvas.drawPath(mPath,highlight);
@@ -215,7 +217,7 @@ public class ScribbleView extends View{
 			invalidate();
 			break;
 		case MotionEvent.ACTION_UP:
-			if (highlighter)
+			if (!highlighter)
 				mCanvas.drawPath(mPath, mPaint);
 			else
 				hCanvas.drawPath(mPath, highlight);
