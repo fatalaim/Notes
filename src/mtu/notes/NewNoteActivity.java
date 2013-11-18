@@ -141,7 +141,7 @@ public class NewNoteActivity extends Activity {
 				String path;
 				if(cat.getSelectedItem().toString().equals("None"))
 				{
-					path = Environment.getExternalStorageDirectory().getPath() + "/" + editText.getText().toString();
+					path = Environment.getExternalStorageDirectory().getPath() + "/" + "None/" + editText.getText().toString();
 				}
 				else
 				{
@@ -172,7 +172,16 @@ public class NewNoteActivity extends Activity {
 			{
 				int count = 0;
 				String filename = "note" + count + ".txt";
-				File file = new File(Environment.getExternalStorageDirectory().getPath() + "/" + filename.substring(0, filename.length() - 4), filename);
+				String path;
+				if(cat.getSelectedItem().toString().equals("None"))
+				{
+					path = Environment.getExternalStorageDirectory().getPath() + "/" + "None/" + filename.substring(0, filename.length() - 4);
+				}
+				else
+				{
+					path = Environment.getExternalStorageDirectory().getPath() + "/" + cat.getSelectedItem().toString() + "/" + filename.substring(0, filename.length() - 4);
+				}
+				File file = new File(path, filename);
 				while(file.exists())
 				{
 					count++;
