@@ -21,6 +21,7 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight=".40"
+            android:onClick="save"
             android:text="@string/addnote" />
     </LinearLayout>
 

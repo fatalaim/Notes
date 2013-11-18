@@ -133,9 +133,11 @@ public class NewNoteActivity extends Activity {
 	public void save(View view)
 	{
 		EditText text = (EditText) findViewById(R.id.notetext);
+		ScribbleView scribble = (ScribbleView) findViewById(R.id.scribbles);
 		Spinner cat = (Spinner) findViewById(R.id.journalspinner);
 		if(text != null) {
 			EditText editText = (EditText)findViewById(R.id.titletext);
+			scribble.Save(editText, cat, getApplicationContext());
 			if(!editText.getText().toString().isEmpty())
 			{
 				int count = -1;
