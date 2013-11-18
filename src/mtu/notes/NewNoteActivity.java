@@ -9,16 +9,12 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.SlidingDrawer;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -29,11 +25,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 
+@SuppressWarnings("deprecation")
 public class NewNoteActivity extends Activity {
 	
 	private ToggleButton toggle;
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -145,11 +141,11 @@ public class NewNoteActivity extends Activity {
 				String path;
 				if(cat.getSelectedItem().toString().equals("None"))
 				{
-					path = Environment.getExternalStorageDirectory().getPath();
+					path = Environment.getExternalStorageDirectory().getPath() + "/" + editText.getText().toString();
 				}
 				else
 				{
-					path = Environment.getExternalStorageDirectory().getPath() + "/" + cat.getSelectedItem().toString();
+					path = Environment.getExternalStorageDirectory().getPath() + "/" + cat.getSelectedItem().toString() + "/" + editText.getText().toString();
 				}
 				File file = new File(path, filename);
 				while(file.exists())
@@ -176,12 +172,12 @@ public class NewNoteActivity extends Activity {
 			{
 				int count = 0;
 				String filename = "note" + count + ".txt";
-				File file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
+				File file = new File(Environment.getExternalStorageDirectory().getPath() + "/" + filename.substring(0, filename.length() - 4), filename);
 				while(file.exists())
 				{
 					count++;
 					filename = "note" + count + ".txt";
-					file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
+					file = new File(Environment.getExternalStorageDirectory().getPath()  + "/" + filename.substring(0, filename.length() - 4), filename);
 				}
 
 				try {
