@@ -1,6 +1,9 @@
 package mtu.notes;
 
+import java.io.File;
+
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,6 +18,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		ScribbleView view = new ScribbleView(this);
 		view.setBackgroundColor(Color.WHITE);
+		new File(Environment.getExternalStorageDirectory().getPath() + "/None/").mkdir();
         //setContentView(view);
 	}
 

@@ -18,7 +18,7 @@
     <string name="newnote">New Note</string>
     <string name="newcat">New Category</string>
     <string name="journalName">Journal Name</string>
-    <string name="loadscribble">Load Scribble</string>
+    <string name="loadscribble">Load Note</string>
     <string name="addpdf">Import PDF</string>
 
     <string-array name="planets_array">
@@ -43,5 +43,7 @@
     <string name="greenp">GreenP</string>
     <string name="eraser">Eraser</string>
     <string name="clear">Clear</string>
+    <string name="loadSelectedNote">Load Selected Note</string>
+    <string name="title_activity_view_note">ViewNote</string>
 
 </resources>

@@ -10,20 +10,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.os.Environment;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 public class ScribbleView extends View{
-	private static final float MINP = 0.25f; 
-	private static final float MAXP = 0.75f;
-
 	private static Paint mPaint;
 	private Bitmap  mBitmap;
 	private Bitmap  hBitmap;
@@ -57,16 +52,16 @@ public class ScribbleView extends View{
 		highlight.setColor(color);
 		highlight.setStrokeWidth(20);
 	}
-	
+
 	public static void penColor(int color){
 		highlighter=false;
 		mPaint.setColor(color);
 	}
-	
+
 	public static void setWidth(float width){
 		highlight.setStrokeWidth(width);
 	}
-	
+
 	public  void init(Context c) {
 		context = c;
 		this.requestFocus();
@@ -91,7 +86,7 @@ public class ScribbleView extends View{
 		mPath = new Path();
 		mBitmapPaint = new Paint(Paint.DITHER_FLAG);
 	}
-	
+
 	public void toggleHighlight(){
 		if (!highlighter){
 			highlighter  = true; 
@@ -101,31 +96,15 @@ public class ScribbleView extends View{
 		}
 	}
 
-	public void Save(EditText editText, Spinner cat, Context context) {
+	public void Save(EditText editText, String path) {
 		Bitmap finBit = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		Canvas fin = new Canvas(finBit);
 		fin.drawBitmap(hBitmap, 0, 0, mBitmapPaint);
 		fin.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
-		if(!editText.getText().toString().isEmpty())
+		if(editText.getText().toString().isEmpty())
 		{
-			int count = -1;
-			String filename = editText.getText().toString() + ".png";
-			String path;
-			if(cat.getSelectedItem().toString().equals("None"))
-			{
-				path = Environment.getExternalStorageDirectory().getPath();
-			}
-			else
-			{
-				path = Environment.getExternalStorageDirectory().getPath() + "/" + cat.getSelectedItem().toString();
-			}
+			String filename = "notes.png";
 			File file = new File(path, filename);
-			while(file.exists())
-			{
-				count++;
-				filename = editText.getText().toString() + count + ".png";
-				file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
-			}
 			try {
 				FileOutputStream out = new FileOutputStream(file);
 				finBit.compress(Bitmap.CompressFormat.PNG, 90, out);
@@ -141,16 +120,8 @@ public class ScribbleView extends View{
 		}
 		else
 		{
-			int count = 0;
-			String filename = "note" + count + ".png";
-			File file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
-			while(file.exists())
-			{
-				count++;
-				filename = "note" + count + ".png";
-				file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
-			}
-
+			String filename = editText.getText().toString() + ".png";
+			File file = new File(path, filename);
 			try {
 				FileOutputStream out = new FileOutputStream(file);
 				finBit.compress(Bitmap.CompressFormat.PNG, 90, out);
@@ -165,9 +136,9 @@ public class ScribbleView extends View{
 			}
 		}
 	}
-	
-	public void load(String filename){
-		File file = new File(filename);
+
+	public void load(String path, String filename){
+		File file = new File(path, filename);
 		Bitmap loaded = Bitmap.createBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
 		mBitmap = loaded.copy(Bitmap.Config.ARGB_8888, true);
 		hBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -185,7 +156,7 @@ public class ScribbleView extends View{
 		if (!highlighter)
 			canvas.drawPath(mPath,mPaint);
 	}
-	
+
 
 	private float mX, mY;
 
@@ -204,7 +175,6 @@ public class ScribbleView extends View{
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			System.out.println(text);
 			mPath.reset();
 			mPath.moveTo(x, y);
 			if (!highlighter)

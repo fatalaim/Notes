@@ -41,7 +41,6 @@ public class ImportPdfActivity extends Activity {
 				LineNumberReader in = new LineNumberReader(new FileReader(Environment.getExternalStorageDirectory() +"/category.txt"));
 				while((read = in.readLine()) != null)
 				{
-					System.out.println(read);
 					list.add(read);
 				}
 				in.close();

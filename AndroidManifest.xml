@@ -43,7 +43,7 @@
         <activity
             android:name="mtu.notes.LoadScribble"
             android:label="@string/title_activity_load_scribble" >
-             <meta-data
+            <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="mtu.notes.MainActivity" />
         </activity>
@@ -54,6 +54,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="mtu.notes.JournalViewActivity" />
+        </activity>
+        <activity
+            android:name="mtu.notes.ViewNoteActivity"
+            android:label="@string/title_activity_view_note"
+            android:parentActivityName="mtu.notes.LoadScribble" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mtu.notes.LoadScribble" />
         </activity>
     </application>
 

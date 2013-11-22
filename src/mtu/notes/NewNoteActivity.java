@@ -27,7 +27,7 @@ import android.os.Build;
 
 @SuppressWarnings("deprecation")
 public class NewNoteActivity extends Activity {
-	
+
 	private ToggleButton toggle;
 
 	@Override
@@ -35,13 +35,13 @@ public class NewNoteActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_note);
 		Spinner spinner = (Spinner) findViewById(R.id.journalspinner);
-		
+
 		//Initially bring the notetext to the front, then put the drawer in front of that
 		EditText notetext = (EditText) findViewById(R.id.notetext);
 		notetext.bringToFront();
 		SlidingDrawer drawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
 		drawer.bringToFront();
-		
+
 		//When the toggle button is clicked
 		toggle = (ToggleButton) findViewById(R.id.drawToggle);
 		toggle.setOnClickListener(new OnClickListener(){
@@ -61,7 +61,7 @@ public class NewNoteActivity extends Activity {
 				}
 			}
 		});
-		
+
 		ArrayList<String> list = new ArrayList<String>();
 		File file = new File(Environment.getExternalStorageDirectory() + "/category.txt");
 		if(file.exists())
@@ -80,7 +80,7 @@ public class NewNoteActivity extends Activity {
 			}
 		}
 		list.add("None");
-		
+
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, list);
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -88,8 +88,8 @@ public class NewNoteActivity extends Activity {
 		spinner.setAdapter(adapter);
 		// Show the Up button in the action bar.
 		setupActionBar();
-		
-		
+
+
 	}
 
 	/**
@@ -131,29 +131,41 @@ public class NewNoteActivity extends Activity {
 		EditText text = (EditText) findViewById(R.id.notetext);
 		ScribbleView scribble = (ScribbleView) findViewById(R.id.scribbles);
 		Spinner cat = (Spinner) findViewById(R.id.journalspinner);
-		if(text != null) {
+		if(text != null)
+		{
 			EditText editText = (EditText)findViewById(R.id.titletext);
-			scribble.Save(editText, cat, getApplicationContext());
+
 			if(!editText.getText().toString().isEmpty())
 			{
-				int count = -1;
 				String filename = editText.getText().toString() + ".txt";
-				String path;
+				String folder;
 				if(cat.getSelectedItem().toString().equals("None"))
 				{
-					path = Environment.getExternalStorageDirectory().getPath() + "/" + "None/" + editText.getText().toString();
+					folder = Environment.getExternalStorageDirectory().getPath() + "/None/" + editText.getText().toString();
 				}
 				else
 				{
-					path = Environment.getExternalStorageDirectory().getPath() + "/" + cat.getSelectedItem().toString() + "/" + editText.getText().toString();
+					folder = Environment.getExternalStorageDirectory().getPath() + "/" + cat.getSelectedItem().toString() + "/" + editText.getText().toString();
 				}
-				File file = new File(path, filename);
-				while(file.exists())
+				File dir = new File(folder);
+				boolean success = dir.mkdir();
+				int count = 0;
+				while(!success)
 				{
+					if(cat.getSelectedItem().toString().equals("None"))
+					{
+						folder = Environment.getExternalStorageDirectory().getPath() + "/None/" + editText.getText().toString() + count;
+					}
+					else
+					{
+						folder = Environment.getExternalStorageDirectory().getPath() + "/" + cat.getSelectedItem().toString() + "/" + editText.getText().toString() + count;
+					}
 					count++;
-					filename = editText.getText().toString() + count + ".txt";
-					file = new File(Environment.getExternalStorageDirectory().getPath(), filename);
+					dir = new File(folder);
+					success = dir.mkdir();
 				}
+				File file = new File(folder, filename);
+				System.out.println(file.getPath());
 				try {
 					FileOutputStream out = new FileOutputStream(file);
 					out.write(text.getText().toString().getBytes());
@@ -167,28 +179,38 @@ public class NewNoteActivity extends Activity {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				scribble.Save(editText, folder);
 			}
 			else
 			{
-				int count = 0;
-				String filename = "note" + count + ".txt";
-				String path;
+				String filename = "notes.txt";
+				String folder;
 				if(cat.getSelectedItem().toString().equals("None"))
 				{
-					path = Environment.getExternalStorageDirectory().getPath() + "/" + "None/" + filename.substring(0, filename.length() - 4);
+					folder = Environment.getExternalStorageDirectory().getPath() + "/None/notes";
 				}
 				else
 				{
-					path = Environment.getExternalStorageDirectory().getPath() + "/" + cat.getSelectedItem().toString() + "/" + filename.substring(0, filename.length() - 4);
+					folder = Environment.getExternalStorageDirectory().getPath() + "/" + cat.getSelectedItem().toString() + "/notes";
 				}
-				File file = new File(path, filename);
-				while(file.exists())
+				File dir = new File(folder);
+				boolean success = dir.mkdir();
+				int count = 0;
+				while(!success)
 				{
+					if(cat.getSelectedItem().toString().equals("None"))
+					{
+						folder = Environment.getExternalStorageDirectory().getPath() + "/None/notes" + count;
+					}
+					else
+					{
+						folder = Environment.getExternalStorageDirectory().getPath() + "/" + cat.getSelectedItem().toString() + "/notes" + count;
+					}
 					count++;
-					filename = "note" + count + ".txt";
-					file = new File(Environment.getExternalStorageDirectory().getPath()  + "/" + filename.substring(0, filename.length() - 4), filename);
+					dir = new File(folder);
+					success = dir.mkdir();
 				}
-
+				File file = new File(folder, filename);
 				try {
 					FileOutputStream out = new FileOutputStream(file);
 					out.write(text.getText().toString().getBytes());
@@ -202,44 +224,45 @@ public class NewNoteActivity extends Activity {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				scribble.Save(editText, folder);
 			}
 		}
 	}
-	
+
 	public void highlighterYellow(View view){
 		ScribbleView.highlightColor(Color.YELLOW);
 	}
-	
+
 	public void highlighterBlue(View view){
 		ScribbleView.highlightColor(Color.BLUE);
 	}
-	
+
 	public void highlighterGreen(View view){
 		ScribbleView.highlightColor(Color.GREEN);
 	}
-	
+
 	//Maybe or maybe not this one
 	public void highlighterPink(View view){
 		ScribbleView.highlightColor(Color.MAGENTA);
 	}
-	
+
 	public void penBlack(View view){
 		ScribbleView.penColor(Color.BLACK);
 	}
-	
+
 	public void penRed(View view){
 		ScribbleView.penColor(Color.RED);
 	}
-	
+
 	public void penBlue(View view){
 		ScribbleView.penColor(Color.BLUE);
 	}
-	
+
 	public void penGreen(View view){
 		ScribbleView.penColor(Color.GREEN);
 	}
-	
-	
-	
+
+
+
 
 }
