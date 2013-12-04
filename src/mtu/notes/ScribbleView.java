@@ -51,6 +51,7 @@ public class ScribbleView extends View{
 		highlighter=true;
 		highlight.setColor(color);
 		highlight.setStrokeWidth(20);
+		highlight.setAlpha(126);
 	}
 
 	public static void penColor(int color){
