@@ -43,6 +43,12 @@
     <string name="greenp">GreenP</string>
     <string name="eraser">Eraser</string>
     <string name="clear">Clear</string>
+    <string name="lefta">LeftA</string>
+    <string name="center">Center</string>
+    <string name="righta">RightA</string>
+    <string name="bold">Bold</string>
+    <string name="italicize">Italicize</string>
+    <string name="underline">Underline</string>
     <string name="loadSelectedNote">Load Selected Note</string>
     <string name="title_activity_view_note">ViewNote</string>
 
