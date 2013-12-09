@@ -17,18 +17,21 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.PorterDuff;
 
 public class ScribbleView extends View{
-	private static Paint mPaint;
+	private static Paint mPaint = new Paint();
 	private Bitmap  mBitmap;
 	private Bitmap  hBitmap;
 	private Canvas  mCanvas;
 	private Canvas hCanvas;
 	private Path    mPath;
 	private Paint   mBitmapPaint;
-	private static Paint highlight;
+	private static Paint highlight = new Paint();
 	Context context;
 	static boolean highlighter = false;
+	static boolean eraser = false;
 	String text="";
 	int height = 400;
 	int width = 5000;
@@ -46,17 +49,40 @@ public class ScribbleView extends View{
 		super(c,at,defStyle);
 		init(c);
 	}
+	
+	public static void erase(){
+		eraser = true;
+		highlight.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+		highlight.setAlpha(0);
+		highlight.setStrokeWidth(30);
+		
+		mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+		mPaint.setAlpha(0);
+		mPaint.setStrokeWidth(30);
+	}
 
 	public static void highlightColor(int color){
 		highlighter=true;
-		highlight.setColor(color);
+		eraser = false;
+		highlight = new Paint();
 		highlight.setStrokeWidth(20);
+		highlight.setStyle(Paint.Style.STROKE);
+		highlight.setStrokeJoin(Paint.Join.MITER);
+		highlight.setStrokeCap(Paint.Cap.SQUARE);
+		highlight.setColor(color);
 		highlight.setAlpha(126);
 	}
 
 	public static void penColor(int color){
 		highlighter=false;
+		eraser = false;
+		mPaint = new Paint();
 		mPaint.setColor(color);
+		mPaint.setStrokeWidth(0);
+		mPaint.setStyle(Paint.Style.STROKE);
+		mPaint.setStrokeJoin(Paint.Join.ROUND);
+		mPaint.setStrokeCap(Paint.Cap.ROUND);
+		mPaint.setStrokeWidth(0);
 	}
 
 	public static void setWidth(float width){
@@ -67,19 +93,6 @@ public class ScribbleView extends View{
 		context = c;
 		this.requestFocus();
 		this.setFocusableInTouchMode(true);
-		mPaint = new Paint();
-		mPaint.setColor(Color.BLACK);
-		mPaint.setStyle(Paint.Style.STROKE);
-		mPaint.setStrokeJoin(Paint.Join.ROUND);
-		mPaint.setStrokeCap(Paint.Cap.ROUND);
-		mPaint.setStrokeWidth(0);
-		mPaint.setTextSize(30);
-		highlight = new Paint();
-		highlight.setStrokeWidth(20);
-		highlight.setStyle(Paint.Style.STROKE);
-		highlight.setStrokeJoin(Paint.Join.MITER);
-		highlight.setStrokeCap(Paint.Cap.SQUARE);
-		highlight.setColor(Color.YELLOW);
 		mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		hBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		mCanvas = new Canvas(mBitmap);
@@ -150,11 +163,11 @@ public class ScribbleView extends View{
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		if(highlighter)
+		if(highlighter||eraser)
 			canvas.drawPath(mPath, highlight);
 		canvas.drawBitmap(hBitmap, 0, 0, mBitmapPaint);
 		canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
-		if (!highlighter)
+		if (!highlighter||eraser)
 			canvas.drawPath(mPath,mPaint);
 	}
 
@@ -178,9 +191,9 @@ public class ScribbleView extends View{
 		case MotionEvent.ACTION_DOWN:
 			mPath.reset();
 			mPath.moveTo(x, y);
-			if (!highlighter)
+			if (!highlighter||eraser)
 				mCanvas.drawPath(mPath,mPaint);
-			else
+			if (highlighter||eraser)
 				hCanvas.drawPath(mPath,highlight);
 			mX = x;
 			mY = y;
@@ -193,14 +206,14 @@ public class ScribbleView extends View{
 			invalidate();
 			break;
 		case MotionEvent.ACTION_UP:
-			if (!highlighter)
+			if (!highlighter||eraser)
 				mCanvas.drawPath(mPath, mPaint);
-			else
+			if (highlighter||eraser)
 				hCanvas.drawPath(mPath, highlight);
 			mPath.reset();
 			invalidate();
 			break;
 		}
 		return true;
-	}   
+	} 
 }

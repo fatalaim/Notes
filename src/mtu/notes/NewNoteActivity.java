@@ -361,7 +361,7 @@ public class NewNoteActivity extends Activity {
 	 * @param view
 	 */
 	public void eraser(View view){
-		ScribbleView.highlightColor(Color.WHITE);
+		ScribbleView.erase();
 	}
 
 	/**
@@ -369,7 +369,6 @@ public class NewNoteActivity extends Activity {
 	 * @param view
 	 */
 	public void clear(View view){
-
 	}
 
 	/**
