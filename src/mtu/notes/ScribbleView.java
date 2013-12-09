@@ -22,10 +22,10 @@ import android.graphics.PorterDuff;
 
 public class ScribbleView extends View{
 	private static Paint mPaint = new Paint();
-	private Bitmap  mBitmap;
-	private Bitmap  hBitmap;
-	private Canvas  mCanvas;
-	private Canvas hCanvas;
+	public Bitmap  mBitmap;
+	public Bitmap  hBitmap;
+	public Canvas  mCanvas;
+	public Canvas hCanvas;
 	private Path    mPath;
 	private Paint   mBitmapPaint;
 	private static Paint highlight = new Paint();
@@ -33,8 +33,8 @@ public class ScribbleView extends View{
 	static boolean highlighter = false;
 	static boolean eraser = false;
 	String text="";
-	int height = 400;
-	int width = 5000;
+	public int height = 400;
+	public int width = 5000;
 
 	public ScribbleView(Context c){
 		super(c);
