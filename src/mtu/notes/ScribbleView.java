@@ -99,6 +99,7 @@ public class ScribbleView extends View{
 		hCanvas = new Canvas(hBitmap);
 		mPath = new Path();
 		mBitmapPaint = new Paint(Paint.DITHER_FLAG);
+		penColor(Color.BLACK);
 	}
 
 	public void toggleHighlight(){

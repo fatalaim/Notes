@@ -8,7 +8,6 @@ import java.io.FileReader;
 import java.io.LineNumberReader;
 import java.util.ArrayList;
 
-import android.R.*;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
