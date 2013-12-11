@@ -28,7 +28,6 @@ public class ScribbleView extends View{
 	private Path    mPath;
 	private Paint   mBitmapPaint;
 	private ArrayList<PaintStuff> Stuff = new ArrayList<PaintStuff>();
-	private static Paint highlight = new Paint();
 	Context context;
 	static boolean highlighter = false;
 	static boolean eraser = false;
@@ -52,11 +51,8 @@ public class ScribbleView extends View{
 
 	public static void erase(){
 		eraser = true;
-		highlight.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
-		highlight.setAlpha(0);
-		highlight.setStrokeWidth(30);
-
-		mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+		highlighter = false;
+		mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
 		mPaint.setAlpha(0);
 		mPaint.setStrokeWidth(30);
 	}
@@ -64,13 +60,13 @@ public class ScribbleView extends View{
 	public static void highlightColor(int color){
 		highlighter=true;
 		eraser = false;
-		highlight = new Paint();
-		highlight.setStrokeWidth(20);
-		highlight.setStyle(Paint.Style.STROKE);
-		highlight.setStrokeJoin(Paint.Join.MITER);
-		highlight.setStrokeCap(Paint.Cap.SQUARE);
-		highlight.setColor(color);
-		highlight.setAlpha(126);
+		mPaint = new Paint();
+		mPaint.setStrokeWidth(20);
+		mPaint.setStyle(Paint.Style.STROKE);
+		mPaint.setStrokeJoin(Paint.Join.MITER);
+		mPaint.setStrokeCap(Paint.Cap.SQUARE);
+		mPaint.setColor(color);
+		mPaint.setAlpha(126);
 	}
 
 	public static void penColor(int color){
@@ -86,7 +82,7 @@ public class ScribbleView extends View{
 	}
 
 	public static void setWidth(float width){
-		highlight.setStrokeWidth(width);
+		mPaint.setStrokeWidth(width);
 	}
 
 	public  void init(Context c) {
@@ -173,7 +169,7 @@ public class ScribbleView extends View{
 			canvas.drawPath(mPath,mPaint);*/
 		for(PaintStuff item : Stuff)
 		{
-			if(item.isHighlighter())
+			if(item.isHighlighter() && !item.isEraser())
 			{
 				Paint temp = item.getColor();
 				canvas.drawPath(item.getPath(), temp);
@@ -181,7 +177,15 @@ public class ScribbleView extends View{
 		}
 		for(PaintStuff item : Stuff)
 		{
-			if(!item.isHighlighter())
+			if(!item.isHighlighter() && !item.isEraser())
+			{
+				Paint temp = item.getColor();
+				canvas.drawPath(item.getPath(), temp);
+			}
+		}
+		for(PaintStuff item : Stuff)
+		{
+			if(item.isEraser())
 			{
 				Paint temp = item.getColor();
 				canvas.drawPath(item.getPath(), temp);
@@ -196,16 +200,17 @@ public class ScribbleView extends View{
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
+			mPath = new Path();
 			Stuff.add(new PaintStuff());
 			if(highlighter)
 			{
 				Stuff.get(Stuff.size()-1).setHighlighter();
-				Stuff.get(Stuff.size()-1).setColor(highlight);
 			}
-			else
+			if(eraser)
 			{
-				Stuff.get(Stuff.size()-1).setColor(mPaint);
+				Stuff.get(Stuff.size()-1).setEraser();
 			}
+			Stuff.get(Stuff.size()-1).setColor(mPaint);
 			mPath.moveTo(x, y);
 			Stuff.get(Stuff.size()-1).setPath(mPath);
 			invalidate();
