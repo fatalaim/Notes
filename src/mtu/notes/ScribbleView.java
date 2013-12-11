@@ -2,6 +2,7 @@ package mtu.notes;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,8 +12,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -28,6 +27,7 @@ public class ScribbleView extends View{
 	public Canvas hCanvas;
 	private Path    mPath;
 	private Paint   mBitmapPaint;
+	private ArrayList<PaintStuff> Stuff = new ArrayList<PaintStuff>();
 	private static Paint highlight = new Paint();
 	Context context;
 	static boolean highlighter = false;
@@ -49,13 +49,13 @@ public class ScribbleView extends View{
 		super(c,at,defStyle);
 		init(c);
 	}
-	
+
 	public static void erase(){
 		eraser = true;
 		highlight.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
 		highlight.setAlpha(0);
 		highlight.setStrokeWidth(30);
-		
+
 		mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
 		mPaint.setAlpha(0);
 		mPaint.setStrokeWidth(30);
@@ -164,25 +164,31 @@ public class ScribbleView extends View{
 
 	@Override
 	protected void onDraw(Canvas canvas) {
+		/*
 		if(highlighter||eraser)
 			canvas.drawPath(mPath, highlight);
 		canvas.drawBitmap(hBitmap, 0, 0, mBitmapPaint);
 		canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
 		if (!highlighter||eraser)
-			canvas.drawPath(mPath,mPaint);
+			canvas.drawPath(mPath,mPaint);*/
+		for(PaintStuff item : Stuff)
+		{
+			if(item.isHighlighter())
+			{
+				Paint temp = item.getColor();
+				canvas.drawPath(item.getPath(), temp);
+			}
+		}
+		for(PaintStuff item : Stuff)
+		{
+			if(!item.isHighlighter())
+			{
+				Paint temp = item.getColor();
+				canvas.drawPath(item.getPath(), temp);
+			}
+		}
 	}
 
-
-	private float mX, mY;
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent ev){
-		Log.i(text,"T");
-		invalidate();
-		if (keyCode==KeyEvent.KEYCODE_ENTER)
-			text = "";
-		return true;
-	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		float x = event.getX();
@@ -190,28 +196,28 @@ public class ScribbleView extends View{
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			mPath.reset();
+			Stuff.add(new PaintStuff());
+			if(highlighter)
+			{
+				Stuff.get(Stuff.size()-1).setHighlighter();
+				Stuff.get(Stuff.size()-1).setColor(highlight);
+			}
+			else
+			{
+				Stuff.get(Stuff.size()-1).setColor(mPaint);
+			}
 			mPath.moveTo(x, y);
-			if (!highlighter||eraser)
-				mCanvas.drawPath(mPath,mPaint);
-			if (highlighter||eraser)
-				hCanvas.drawPath(mPath,highlight);
-			mX = x;
-			mY = y;
+			Stuff.get(Stuff.size()-1).setPath(mPath);
 			invalidate();
 			break;
 		case MotionEvent.ACTION_MOVE:
-			mPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);
-			mX = x;
-			mY = y;
+			mPath.lineTo(x, y);
+			Stuff.get(Stuff.size()-1).setPath(mPath);
 			invalidate();
 			break;
 		case MotionEvent.ACTION_UP:
-			if (!highlighter||eraser)
-				mCanvas.drawPath(mPath, mPaint);
-			if (highlighter||eraser)
-				hCanvas.drawPath(mPath, highlight);
-			mPath.reset();
+			mPath.lineTo(x, y);
+			Stuff.get(Stuff.size()-1).setPath(mPath);
 			invalidate();
 			break;
 		}
