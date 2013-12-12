@@ -1,43 +1,37 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".JournalViewActivity" >
-
-    <EditText
-        android:id="@+id/journalName"
-        android:layout_width="wrap_content"
+    tools:context=".JournalViewActivity"
+    android:orientation= "vertical" >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/newcat"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/newcat"
-        android:layout_marginTop="39dp"
-        android:hint="@string/journalName"
-        android:ems="10" >
+        android:orientation="horizontal" >
 
-        <requestFocus />
-    </EditText>
+        <EditText
+            android:id="@+id/newJournal"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight=".60"
+            android:hint="@string/journal_name"/>
 
-    <Button
-        android:id="@+id/newcat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/journalName"
-        android:layout_centerHorizontal="true"
-        android:onClick="newCategory"
-        android:text="@string/newcat" />
+        <Button
+            android:id="@+id/addJournal"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight=".40"
+            android:onClick="newCategory"
+            android:text="@string/add_journal"/>
+    </LinearLayout>
+    
+    <ExpandableListView 
+        android:id="@+id/expList"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:groupIndicator="@null"/>
 
-    <Button
-        android:id="@+id/importPdf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/importpdf"
-        android:onClick="importPDF" />
+   
 
-</RelativeLayout>
+</LinearLayout>

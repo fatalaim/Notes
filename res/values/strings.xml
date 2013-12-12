@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Notes</string>
+    <string name="app_name">Note Blotter</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="journals">Journals</string>
@@ -51,5 +51,12 @@
     <string name="underline">Underline</string>
     <string name="loadSelectedNote">Load Selected Note</string>
     <string name="title_activity_view_note">ViewNote</string>
+    <string name="save_note">Save Note</string>
+    <string name="journal_name">Journal Name</string>
+    <string name="add_journal">Add Journal</string>
+    <string name="edit">Edit</string>
+    <string name="view">View</string>
+    <string name="delete">Delete</string>
+    <string name="logo">The logo of NoteBlotter</string>
 
 </resources>

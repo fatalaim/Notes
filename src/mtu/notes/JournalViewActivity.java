@@ -1,7 +1,15 @@
 package mtu.notes;
 
 import java.io.File;
+
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,21 +18,96 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 
 public class JournalViewActivity extends Activity {
 
+	//List of the journals
+	List<String> journalList;
+	//List of the notes in a specific journal
+	List<String> noteList;
+	//Map of journals with notes names as their values
+	Map<String, List<String>> journals;
+	ExpandableListView expList;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.journal_view);
+		
+		//Create the list of journals
+		try{
+			createGroupList();
+		}catch(FileNotFoundException e){
+			System.out.println("Journals file not found.");
+		}
+		
+		//Create the map of journals and notes
+		createCollection();
+		
+		expList = (ExpandableListView) findViewById(R.id.expList);
+		final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
+				this, journalList, journals);
+		expList.setAdapter(expListAdapter);
+		
+		expList.setOnChildClickListener(new OnChildClickListener(){
+			public boolean onChildClick(ExpandableListView parent, View view, int groupPosition,
+					int childPosition, long id){
+				final String selected = (String) expListAdapter.getChild(groupPosition, childPosition);
+				Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG).show();
+				return true;
+			}
+			
+		});
+		
 		// Show the Up button in the action bar.
 		setupActionBar();
+	}
+	
+	/**
+	 * Get all the journal names and add them to a list
+	 * @throws FileNotFoundException 
+	 */
+	private void createGroupList() throws FileNotFoundException{
+		journalList = new ArrayList<String>();
+		File file = new File(Environment.getExternalStorageDirectory() + "/category.txt");
+		if(file.exists()){
+			FileReader reader = new FileReader(file);
+			Scanner in = new Scanner(reader);
+			while(in.hasNext()){
+				journalList.add(in.next());
+			}
+		}
+		
+	}
+	
+	/**
+	 * Create the hashmap with journal names as keys and note names as values
+	 */
+	private void createCollection(){
+		journals = new LinkedHashMap<String, List<String>>();
+		for(String journalName : journalList){
+			loadChild(journalName);
+			journals.put(journalName, noteList);
+		}
+	}
+	
+	/**
+	 * Gets all the note names based on the journal name
+	 * @param journalName
+	 */
+	private void loadChild(String journalName){
+		noteList = new ArrayList<String>();
+		File journalFolder = new File(Environment.getExternalStorageDirectory() + "/" + journalName);
+		for(File note : journalFolder.listFiles()){
+			noteList.add(note.getName());
+		}
 	}
 
 	/**
@@ -63,7 +146,7 @@ public class JournalViewActivity extends Activity {
 
 	public void newCategory(View view)
 	{
-		EditText editText = (EditText) findViewById(R.id.journalName);
+		EditText editText = (EditText) findViewById(R.id.newJournal);
 		if (editText.getText().toString().isEmpty())
 		{
 			Context context = getApplicationContext();
@@ -118,9 +201,9 @@ public class JournalViewActivity extends Activity {
 		}
 	}
 	
-	public void importPDF(View view)
+	/**public void importPDF(View view)
 	{
 		Intent intent = new Intent(this,ImportPdfActivity.class);
 		startActivity(intent);
-	}
+	}**/
 }

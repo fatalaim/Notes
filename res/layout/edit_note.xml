@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/newnotepage"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Spinner
+            android:id="@+id/journalspinner"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight=".60" />
+
+        <Button
+            android:id="@+id/savebutton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight=".40"
+            android:onClick="save"
+            android:text="@string/save_note" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <EditText
+            android:id="@+id/titletext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:ems="10"
+            android:hint="@string/notetitle" />
+
+        <requestFocus />
+
+        <EditText
+            android:id="@+id/notetext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/titletext"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="@string/notetext"
+            android:inputType="textMultiLine"
+            android:paddingLeft="8dip" />
+
+        <mtu.notes.ScribbleView
+            android:id="@+id/scribbles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/titletext" />
+
+        <SlidingDrawer
+            android:id="@+id/slidingDrawer"
+            android:layout_width="250dip"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/notetext"
+            android:content="@+id/content"
+            android:handle="@+id/handle"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/handle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@+string/slidingDrawerButton"
+                android:src="@drawable/arrow" />
+
+            <LinearLayout
+                android:id="@id/content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+
+                <ToggleButton
+                    android:id="@+id/drawToggle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/togglebutton"
+                    android:textOff="Draw"
+                    android:textOn="Type"
+                    android:onClick="drawToggle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/yellowHigh"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".50"
+                        android:onClick="highlighterYellow"
+                        android:text="@string/yellowh" />
+
+                    <Button
+                        android:id="@+id/blueHigh"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".50"
+                        android:onClick="highlighterBlue"
+                        android:text="@string/blueh" />
+
+                    <Button
+                        android:id="@+id/leftA"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".33"
+                        android:text="@string/lefta"
+                        android:onClick="alignLeft"/>
+
+                    <Button
+                        android:id="@+id/center"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".33"
+                        android:text="@string/center"
+                        android:onClick="alignCenter" />
+
+                    <Button
+                        android:id="@+id/rightA"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".33"
+                        android:text="@string/righta"
+                        android:onClick="alignRight" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/greenHigh"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".50"
+                        android:onClick="highlighterGreen"
+                        android:text="@string/greenh" />
+
+                    <Button
+                        android:id="@+id/pinkHigh"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".50"
+                        android:onClick="highlighterPink"
+                        android:text="@string/pinkh" />
+
+                    <ToggleButton
+                        android:id="@+id/bold"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".33"
+                        android:text="@string/bold"
+                        android:textOn="Bold"
+                        android:textOff="Bold" />
+
+                    <ToggleButton
+                        android:id="@+id/italic"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".33"
+                        android:text="@string/italicize"
+                        android:textOn="Italicize"
+                        android:textOff="Italicize" />
+
+                    <ToggleButton
+                        android:id="@+id/underline"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".33"
+                        android:text="@string/underline"
+                        android:textOn="Under"
+                        android:textOff="Under" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/blackPen"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".50"
+                        android:onClick="penBlack"
+                        android:text="@string/blackp" />
+
+                    <Button
+                        android:id="@+id/bluePen"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".50"
+                        android:onClick="penBlue"
+                        android:text="@string/bluep" />
+
+                    <Spinner
+                        android:id="@+id/sizeSpinner"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/redPen"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".50"
+                        android:onClick="penRed"
+                        android:text="@string/redp" />
+
+                    <Button
+                        android:id="@+id/greenPen"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".50"
+                        android:onClick="penGreen"
+                        android:text="@string/greenp" />
+
+                    <Spinner
+                        android:id="@+id/colorSpinner"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/eraserButton"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".50"
+                        android:text="@string/eraser"
+                        android:onClick="eraser" />
+
+                    <Button
+                        android:id="@+id/clearButton"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".50"
+                        android:text="@string/clear"
+                        android:onClick="clear" />
+                </LinearLayout>
+            </LinearLayout>
+        </SlidingDrawer>
+    </RelativeLayout>
+
+</LinearLayout>

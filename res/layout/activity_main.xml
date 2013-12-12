@@ -6,16 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/pdfname"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/journal"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Note Blotter"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="55sp"
-        tools:ignore="HardcodedText" />
+        android:contentDescription="@string/logo"
+        android:scaleType="fitStart"
+        android:src="@drawable/noteblotter_logo2" />
 
     <Button
         android:id="@+id/journal"
