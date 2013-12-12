@@ -25,8 +25,6 @@ import android.widget.ToggleButton;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -182,7 +180,9 @@ public class NewNoteActivity extends Activity {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				scribble.Save(editText, folder);
+				scribble.setDrawingCacheEnabled(true);
+				scribble.Save(editText, folder, scribble.getDrawingCache());
+				scribble.destroyDrawingCache();
 			}
 			else
 			{
@@ -227,7 +227,9 @@ public class NewNoteActivity extends Activity {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				scribble.Save(editText, folder);
+				scribble.setDrawingCacheEnabled(true);
+				scribble.Save(editText, folder, scribble.getDrawingCache());
+				scribble.destroyDrawingCache();
 			}
 		}
 	}
@@ -371,11 +373,7 @@ public class NewNoteActivity extends Activity {
 	 */
 	public void clear(View view){
 		ScribbleView scribble = (ScribbleView) findViewById(R.id.scribbles);
-		scribble.mBitmap = Bitmap.createBitmap(scribble.width, scribble.height, Bitmap.Config.ARGB_8888);
-		scribble.hBitmap = Bitmap.createBitmap(scribble.width, scribble.height, Bitmap.Config.ARGB_8888);
-		scribble.mCanvas = new Canvas(scribble.mBitmap);
-		scribble.hCanvas = new Canvas(scribble.hBitmap);
-		scribble.invalidate();
+		scribble.clear();
 	}
 
 	/**

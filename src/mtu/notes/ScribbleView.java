@@ -21,10 +21,8 @@ import android.graphics.PorterDuff;
 
 public class ScribbleView extends View{
 	private static Paint mPaint = new Paint();
-	public Bitmap  mBitmap;
-	public Bitmap  hBitmap;
-	public Canvas  mCanvas;
-	public Canvas hCanvas;
+	public Canvas sCanvas;
+	public Bitmap bitmap;
 	private Path    mPath;
 	private Paint   mBitmapPaint;
 	private ArrayList<PaintStuff> Stuff = new ArrayList<PaintStuff>();
@@ -52,6 +50,7 @@ public class ScribbleView extends View{
 	public static void erase(){
 		eraser = true;
 		highlighter = false;
+		mPaint = new Paint();
 		mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
 		mPaint.setAlpha(0);
 		mPaint.setStrokeWidth(30);
@@ -89,13 +88,19 @@ public class ScribbleView extends View{
 		context = c;
 		this.requestFocus();
 		this.setFocusableInTouchMode(true);
-		mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-		hBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-		mCanvas = new Canvas(mBitmap);
-		hCanvas = new Canvas(hBitmap);
 		mPath = new Path();
 		mBitmapPaint = new Paint(Paint.DITHER_FLAG);
 		penColor(Color.BLACK);
+	}
+	
+	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		super.onSizeChanged(w, h, oldw, oldh);
+		if(bitmap == null)
+		{
+			bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+		}
+		sCanvas = new Canvas(bitmap);
 	}
 
 	public void toggleHighlight(){
@@ -107,18 +112,14 @@ public class ScribbleView extends View{
 		}
 	}
 
-	public void Save(EditText editText, String path) {
-		Bitmap finBit = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-		Canvas fin = new Canvas(finBit);
-		fin.drawBitmap(hBitmap, 0, 0, mBitmapPaint);
-		fin.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
+	public void Save(EditText editText, String path, Bitmap fBitmap) {
 		if(editText.getText().toString().isEmpty())
 		{
 			String filename = "notes.png";
 			File file = new File(path, filename);
 			try {
 				FileOutputStream out = new FileOutputStream(file);
-				finBit.compress(Bitmap.CompressFormat.PNG, 90, out);
+				fBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
 				out.close();
 				CharSequence toastText = filename + " saved.";
 				int duration = Toast.LENGTH_SHORT;
@@ -135,7 +136,7 @@ public class ScribbleView extends View{
 			File file = new File(path, filename);
 			try {
 				FileOutputStream out = new FileOutputStream(file);
-				finBit.compress(Bitmap.CompressFormat.PNG, 90, out);
+				fBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
 				out.close();
 				CharSequence toastText = filename + " saved.";
 				int duration = Toast.LENGTH_SHORT;
@@ -150,12 +151,12 @@ public class ScribbleView extends View{
 
 	public void load(String path, String filename){
 		File file = new File(path, filename);
-		Bitmap loaded = Bitmap.createBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
-		mBitmap = loaded.copy(Bitmap.Config.ARGB_8888, true);
-		hBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-		invalidate();
-		mCanvas = new Canvas(mBitmap);
-		hCanvas = new Canvas(hBitmap);
+        Bitmap loaded = BitmapFactory.decodeFile(file.getAbsolutePath());
+        bitmap = loaded.copy(Bitmap.Config.ARGB_8888, true);
+        //sCanvas = new Canvas(bitmap);
+        System.out.println("there");
+        mBitmapPaint = new Paint(Paint.DITHER_FLAG);
+        invalidate();
 	}
 
 	@Override
@@ -167,6 +168,8 @@ public class ScribbleView extends View{
 		canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
 		if (!highlighter||eraser)
 			canvas.drawPath(mPath,mPaint);*/
+		System.out.println("here");
+		canvas.drawBitmap(bitmap, 0, 0, mBitmapPaint);
 		for(PaintStuff item : Stuff)
 		{
 			if(item.isHighlighter() && !item.isEraser())
@@ -202,11 +205,11 @@ public class ScribbleView extends View{
 		case MotionEvent.ACTION_DOWN:
 			mPath = new Path();
 			Stuff.add(new PaintStuff());
-			if(highlighter)
+			if(highlighter == true)
 			{
 				Stuff.get(Stuff.size()-1).setHighlighter();
 			}
-			if(eraser)
+			if(eraser == true)
 			{
 				Stuff.get(Stuff.size()-1).setEraser();
 			}
@@ -227,5 +230,9 @@ public class ScribbleView extends View{
 			break;
 		}
 		return true;
+	}
+	public void clear() {
+		sCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
+		invalidate();
 	} 
 }
