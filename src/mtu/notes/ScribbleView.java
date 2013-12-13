@@ -51,9 +51,12 @@ public class ScribbleView extends View{
 		eraser = true;
 		highlighter = false;
 		mPaint = new Paint();
-		mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-		mPaint.setAlpha(0);
+		//mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
 		mPaint.setStrokeWidth(30);
+		mPaint.setColor(Color.WHITE);
+		mPaint.setStyle(Paint.Style.STROKE);
+		mPaint.setStrokeJoin(Paint.Join.MITER);
+		mPaint.setStrokeCap(Paint.Cap.SQUARE);
 	}
 
 	public static void highlightColor(int color){
@@ -92,7 +95,7 @@ public class ScribbleView extends View{
 		mBitmapPaint = new Paint(Paint.DITHER_FLAG);
 		penColor(Color.BLACK);
 	}
-	
+
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
@@ -151,12 +154,9 @@ public class ScribbleView extends View{
 
 	public void load(String path, String filename){
 		File file = new File(path, filename);
-        Bitmap loaded = BitmapFactory.decodeFile(file.getAbsolutePath());
-        bitmap = loaded.copy(Bitmap.Config.ARGB_8888, true);
-        //sCanvas = new Canvas(bitmap);
-        System.out.println("there");
-        mBitmapPaint = new Paint(Paint.DITHER_FLAG);
-        invalidate();
+		Bitmap loaded = BitmapFactory.decodeFile(file.getAbsolutePath());
+		bitmap = loaded.copy(Bitmap.Config.ARGB_8888, true);
+		invalidate();
 	}
 
 	@Override
@@ -172,27 +172,8 @@ public class ScribbleView extends View{
 		canvas.drawBitmap(bitmap, 0, 0, mBitmapPaint);
 		for(PaintStuff item : Stuff)
 		{
-			if(item.isHighlighter() && !item.isEraser())
-			{
-				Paint temp = item.getColor();
-				canvas.drawPath(item.getPath(), temp);
-			}
-		}
-		for(PaintStuff item : Stuff)
-		{
-			if(!item.isHighlighter() && !item.isEraser())
-			{
-				Paint temp = item.getColor();
-				canvas.drawPath(item.getPath(), temp);
-			}
-		}
-		for(PaintStuff item : Stuff)
-		{
-			if(item.isEraser())
-			{
-				Paint temp = item.getColor();
-				canvas.drawPath(item.getPath(), temp);
-			}
+			Paint temp = item.getColor();
+			canvas.drawPath(item.getPath(), temp);
 		}
 	}
 
