@@ -27,6 +27,38 @@
         <item>Concurrent</item>
         <item>Formal Models</item>
     </string-array>
+    
+    <string-array name="size_array">
+        <item>Font Size</item>
+        <item>10</item>
+        <item>12</item>
+        <item>14</item>
+        <item>16</item>
+        <item>18</item>
+        <item>20</item>
+        <item>24</item>
+        <item>28</item>
+        <item>32</item>
+        <item>36</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+    </string-array>
+    
+    <string-array name="color_array">
+        <item>Font Color</item>
+        <item>Black</item>
+        <item>Red</item>
+        <item>Blue</item>
+        <item>Yellow</item>
+        <item>Green</item>
+        <item>Cyan</item>
+        <item>Magenta</item>
+        <item>Gray</item>
+        <item>Dark Gray</item>
+        <item>Light Gray</item>
+        <item>White</item>
+    </string-array>
 
     <string name="importpdf">Import PDF</string>
     <string name="title_activity_import_pdf">ImportPDF</string>
@@ -70,5 +102,8 @@
     <string name="green_pen">Green pen image</string>
     <string name="pinkHighlighter">Pink highlighter image</string>
     <string name="black_pen">Black pen image</string>
+    <string name="size">Size</string>
+    <string name="red">Red</string>
+    <string name="size_prompt">Size</string>
 
 </resources>
