@@ -1,5 +1,6 @@
 package mtu.notes;
 
+import java.io.File;
 import java.util.List;
 
 import java.util.Map;
@@ -41,7 +42,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 	}
 
 	@Override
-	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,
+	public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView,
 			ViewGroup parent) {
 		final String noteName = (String) getChild(groupPosition, childPosition);
 		LayoutInflater inflater = context.getLayoutInflater();
@@ -80,9 +81,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 		});
 		
 		Button delete = (Button) convertView.findViewById(R.id.deleteButton);
-		delete.setOnClickListener(new OnClickListener(){
+		delete.setOnClickListener(new OnClickListener(){ 
 			public void onClick(View view){
-				//TODO Delete note here
+				File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+notes.get(groupPosition)+"/"+noteName);
+				String files[] = file.list();
+				for (String temp : files){
+					File fileDelete = new File(file,temp);
+					fileDelete.delete(); 
+				}
+				file.delete();
 			}
 		});
 		
