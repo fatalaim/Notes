@@ -59,5 +59,16 @@
     <string name="view">View</string>
     <string name="delete">Delete</string>
     <string name="logo">The logo of NoteBlotter</string>
+    <string name="leftA">Align left picture</string>
+    <string name="centerA">Center align image</string>
+    <string name="rightA">Right align image</string>
+    <string name="yellowHighlighter">Yellow highlighter image</string>
+    <string name="blueHighlighter">Blue Highlighter image</string>
+    <string name="greenHighlighter">Green Highlighter image</string>
+    <string name="blue_pen">Blue pen image</string>
+    <string name="red_pen">Red pen image</string>
+    <string name="green_pen">Green pen image</string>
+    <string name="pinkHighlighter">Pink highlighter image</string>
+    <string name="black_pen">Black pen image</string>
 
 </resources>

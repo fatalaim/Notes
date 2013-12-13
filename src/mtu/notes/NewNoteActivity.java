@@ -2,7 +2,6 @@ package mtu.notes;
 
 import java.io.File;
 
-
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.LineNumberReader;
@@ -18,6 +17,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.SlidingDrawer;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -70,21 +70,21 @@ public class NewNoteActivity extends Activity {
 		drawer.bringToFront();
 
 		//Put the drawing option at the back
-		Button yellowH = (Button) findViewById(R.id.yellowHigh);
+		ImageButton yellowH = (ImageButton) findViewById(R.id.yellowHigh);
 		yellowH.setVisibility(View.GONE);
-		Button blueH = (Button) findViewById(R.id.blueHigh);
+		ImageButton blueH = (ImageButton) findViewById(R.id.blueHigh);
 		blueH.setVisibility(View.GONE);
-		Button greenH = (Button) findViewById(R.id.greenHigh);
+		ImageButton greenH = (ImageButton) findViewById(R.id.greenHigh);
 		greenH.setVisibility(View.GONE);
-		Button pinkH = (Button) findViewById(R.id.pinkHigh);
+		ImageButton pinkH = (ImageButton) findViewById(R.id.pinkHigh);
 		pinkH.setVisibility(View.GONE);
-		Button blackP = (Button) findViewById(R.id.blackPen);
+		ImageButton blackP = (ImageButton) findViewById(R.id.blackPen);
 		blackP.setVisibility(View.GONE);
-		Button blueP = (Button) findViewById(R.id.bluePen);
+		ImageButton blueP = (ImageButton) findViewById(R.id.bluePen);
 		blueP.setVisibility(View.GONE);
-		Button redP = (Button) findViewById(R.id.redPen);
+		ImageButton redP = (ImageButton) findViewById(R.id.redPen);
 		redP.setVisibility(View.GONE);
-		Button greenP = (Button) findViewById(R.id.greenPen);
+		ImageButton greenP = (ImageButton) findViewById(R.id.greenPen);
 		greenP.setVisibility(View.GONE);
 		Button eraser = (Button) findViewById(R.id.eraserButton);
 		eraser.setVisibility(View.GONE);
@@ -244,9 +244,9 @@ public class NewNoteActivity extends Activity {
 		ToggleButton toggle = (ToggleButton) findViewById(R.id.drawToggle);
 
 		//All the views for the text options
-		Button left = (Button) findViewById(R.id.leftA);
-		Button center = (Button) findViewById(R.id.center);
-		Button right = (Button) findViewById(R.id.rightA);
+		ImageButton left = (ImageButton) findViewById(R.id.leftA);
+		ImageButton center = (ImageButton) findViewById(R.id.center);
+		ImageButton right = (ImageButton) findViewById(R.id.rightA);
 		ToggleButton bold = (ToggleButton) findViewById(R.id.bold);
 		ToggleButton italicize = (ToggleButton) findViewById(R.id.italic);
 		ToggleButton underline = (ToggleButton) findViewById(R.id.underline);
@@ -254,14 +254,14 @@ public class NewNoteActivity extends Activity {
 		Spinner color = (Spinner) findViewById(R.id.colorSpinner);
 
 		//All the views for the drawing options
-		Button yellowH = (Button) findViewById(R.id.yellowHigh);
-		Button blueH = (Button) findViewById(R.id.blueHigh);
-		Button greenH = (Button) findViewById(R.id.greenHigh);
-		Button pinkH = (Button) findViewById(R.id.pinkHigh);
-		Button blackP = (Button) findViewById(R.id.blackPen);
-		Button blueP = (Button) findViewById(R.id.bluePen);
-		Button redP = (Button) findViewById(R.id.redPen);
-		Button greenP = (Button) findViewById(R.id.greenPen);
+		ImageButton yellowH = (ImageButton) findViewById(R.id.yellowHigh);
+		ImageButton blueH = (ImageButton) findViewById(R.id.blueHigh);
+		ImageButton greenH = (ImageButton) findViewById(R.id.greenHigh);
+		ImageButton pinkH = (ImageButton) findViewById(R.id.pinkHigh);
+		ImageButton blackP = (ImageButton) findViewById(R.id.blackPen);
+		ImageButton blueP = (ImageButton) findViewById(R.id.bluePen);
+		ImageButton redP = (ImageButton) findViewById(R.id.redPen);
+		ImageButton greenP = (ImageButton) findViewById(R.id.greenPen);
 		Button eraser = (Button) findViewById(R.id.eraserButton);
 		Button clear = (Button) findViewById(R.id.clearButton);
 
