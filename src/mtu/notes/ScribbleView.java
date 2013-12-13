@@ -16,7 +16,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.PorterDuff;
 
 public class ScribbleView extends View{

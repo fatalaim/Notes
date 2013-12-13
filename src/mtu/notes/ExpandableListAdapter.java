@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -51,15 +52,25 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 		Button edit = (Button) convertView.findViewById(R.id.editButton);
 		edit.setOnClickListener(new OnClickListener(){
 			public void onClick(View view){
-				Intent intent = new Intent(context.getBaseContext(), EditNoteActivity.class);
+				Intent intent = new Intent(context, EditNoteActivity.class);
 				context.startActivity(intent);
 			}
 		});
 		
+		String journalPath = "";
+		int i = 0;
+		for(String jN : journals.keySet())
+		{
+			if (i == groupPosition)
+				journalPath = jN;
+		}
+		final String jN = journalPath;
 		Button view = (Button) convertView.findViewById(R.id.viewButton);
 		view.setOnClickListener(new OnClickListener(){
 			public void onClick(View view){
 				Intent intent = new Intent(context, ViewNoteActivity.class);
+				intent.putExtra("path", Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + jN + "/" + noteName);
+				intent.putExtra("name", noteName);
 				context.startActivity(intent);
 			}
 		});
