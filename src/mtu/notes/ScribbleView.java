@@ -168,7 +168,6 @@ public class ScribbleView extends View{
 		canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
 		if (!highlighter||eraser)
 			canvas.drawPath(mPath,mPaint);*/
-		System.out.println("here");
 		canvas.drawBitmap(bitmap, 0, 0, mBitmapPaint);
 		for(PaintStuff item : Stuff)
 		{
@@ -213,7 +212,8 @@ public class ScribbleView extends View{
 		return true;
 	}
 	public void clear() {
-		sCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
+		sCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+		Stuff.clear();
 		invalidate();
 	} 
 }
