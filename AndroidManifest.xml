@@ -63,6 +63,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="mtu.notes.LoadScribble" />
         </activity>
+        <activity
+            android:name="mtu.notes.EditNoteActivity"
+            android:label="@string/title_activity_edit_note"
+            android:parentActivityName="mtu.notes.JournalViewActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mtu.notes.JournalViewActivity" />
+        </activity>
     </application>
 
 </manifest>
