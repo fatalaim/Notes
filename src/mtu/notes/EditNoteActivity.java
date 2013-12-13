@@ -1,7 +1,6 @@
 package mtu.notes;
 
 import java.io.File;
-
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.LineNumberReader;
@@ -10,6 +9,7 @@ import java.util.ArrayList;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -26,6 +26,7 @@ import android.widget.EditText;
 //import android.widget.TextView;
 import android.widget.SlidingDrawer;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -36,6 +37,45 @@ public class EditNoteActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_note);
 		//TODO Load the note here and set the editText and scribbles here
+		
+		Intent intent = getIntent();
+		Bundle bundle = intent.getExtras();
+		String path = bundle.getString("path");
+		String name = bundle.getString("name");
+		TextView text = (TextView)findViewById(R.id.notetext);
+		ScribbleView scribbleView = (ScribbleView)findViewById(R.id.scribbles);
+		EditText title = (EditText)findViewById(R.id.titletext);
+		title.setText(name);
+		if(Character.isDigit(name.charAt(name.length()-1)))
+		{
+			name = name.substring(0, name.length()-2);
+		}
+		File file = new File(path, name + ".txt");
+		String fileText = "";
+		if(file.exists())
+		{
+			String read;
+			try
+			{
+				LineNumberReader in = new LineNumberReader(new FileReader(file.getPath()));
+				while((read = in.readLine()) != null)
+				{
+					fileText += read;
+				}
+				in.close();
+			} 
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		if(!fileText.equals(""))
+		{
+			text.setText(fileText);
+		}
+		System.out.println(path);
+		System.out.println(name);
+		scribbleView.load(path, name + ".png");
 		
 		Spinner spinner = (Spinner) findViewById(R.id.journalspinner);
 
@@ -66,8 +106,7 @@ public class EditNoteActivity extends Activity{
 		setupActionBar();
 
 		//Initially bring the notetext to the front, then put the drawer in front of that
-		EditText notetext = (EditText) findViewById(R.id.notetext);
-		notetext.bringToFront();
+		text.bringToFront();
 		SlidingDrawer drawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
 		drawer.bringToFront();
 

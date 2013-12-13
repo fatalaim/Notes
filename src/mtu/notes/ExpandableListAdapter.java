@@ -49,13 +49,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 			convertView = inflater.inflate(R.layout.child_item, null);
 		
 		TextView note = (TextView) convertView.findViewById(R.id.noteName);
-		Button edit = (Button) convertView.findViewById(R.id.editButton);
-		edit.setOnClickListener(new OnClickListener(){
-			public void onClick(View view){
-				Intent intent = new Intent(context, EditNoteActivity.class);
-				context.startActivity(intent);
-			}
-		});
 		
 		String journalPath = "";
 		int i = 0;
@@ -65,6 +58,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 				journalPath = jN;
 		}
 		final String jN = journalPath;
+		Button edit = (Button) convertView.findViewById(R.id.editButton);
+		edit.setOnClickListener(new OnClickListener(){
+			public void onClick(View view){
+				Intent intent = new Intent(context, EditNoteActivity.class);
+				intent.putExtra("path", Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + jN + "/" + noteName);
+				intent.putExtra("name", noteName);
+				context.startActivity(intent);
+			}
+		});
+		
 		Button view = (Button) convertView.findViewById(R.id.viewButton);
 		view.setOnClickListener(new OnClickListener(){
 			public void onClick(View view){
