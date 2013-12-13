@@ -180,33 +180,6 @@
                         android:contentDescription="@string/pinkHighlighter"
                         android:onClick="highlighterPink"
                         android:src="@drawable/pink_highlighter" />
-
-                    <ToggleButton
-                        android:id="@+id/bold"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".33"
-                        android:text="@string/bold"
-                        android:textOff="Bold"
-                        android:textOn="Bold" />
-
-                    <ToggleButton
-                        android:id="@+id/italic"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".33"
-                        android:text="@string/italicize"
-                        android:textOff="Italicize"
-                        android:textOn="Italicize" />
-
-                    <ToggleButton
-                        android:id="@+id/underline"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".33"
-                        android:text="@string/underline"
-                        android:textOff="Under"
-                        android:textOn="Under" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -234,7 +207,8 @@
                     <Spinner
                         android:id="@+id/sizeSpinner"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent" />
+                        android:layout_height="fill_parent"
+                        android:entries="@array/size_array"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -262,7 +236,8 @@
                     <Spinner
                         android:id="@+id/colorSpinner"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent" />
+                        android:layout_height="fill_parent"
+                        android:entries="@array/color_array"/>
                 </LinearLayout>
 
                 <LinearLayout

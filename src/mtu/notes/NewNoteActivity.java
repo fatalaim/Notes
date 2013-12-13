@@ -26,15 +26,17 @@ import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Build;
 
 @SuppressWarnings("deprecation")
-public class NewNoteActivity extends Activity {
+public class NewNoteActivity extends Activity {	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_note);
+
+		addSpinnerListener();
+
 		Spinner spinner = (Spinner) findViewById(R.id.journalspinner);
 
 		ArrayList<String> list = new ArrayList<String>();
@@ -232,6 +234,13 @@ public class NewNoteActivity extends Activity {
 		}
 	}
 
+	public void addSpinnerListener(){
+		Spinner size = (Spinner) findViewById(R.id.sizeSpinner);
+		size.setOnItemSelectedListener(new SizeSelectedListener(this));
+		Spinner color = (Spinner) findViewById(R.id.colorSpinner);
+		color.setOnItemSelectedListener(new ColorSelectedListener(this));
+	}
+
 	/**
 	 * Switches the view of the editText to the scribbleView and vice versa. Also switches
 	 * the buttons associated to each view.
@@ -247,9 +256,6 @@ public class NewNoteActivity extends Activity {
 		ImageButton left = (ImageButton) findViewById(R.id.leftA);
 		ImageButton center = (ImageButton) findViewById(R.id.center);
 		ImageButton right = (ImageButton) findViewById(R.id.rightA);
-		ToggleButton bold = (ToggleButton) findViewById(R.id.bold);
-		ToggleButton italicize = (ToggleButton) findViewById(R.id.italic);
-		ToggleButton underline = (ToggleButton) findViewById(R.id.underline);
 		Spinner size = (Spinner) findViewById(R.id.sizeSpinner);
 		Spinner color = (Spinner) findViewById(R.id.colorSpinner);
 
@@ -275,9 +281,6 @@ public class NewNoteActivity extends Activity {
 			left.setVisibility(View.GONE);
 			center.setVisibility(View.GONE);
 			right.setVisibility(View.GONE);
-			bold.setVisibility(View.GONE);
-			italicize.setVisibility(View.GONE);
-			underline.setVisibility(View.GONE);
 			size.setVisibility(View.GONE);
 			color.setVisibility(View.GONE);
 
@@ -315,14 +318,11 @@ public class NewNoteActivity extends Activity {
 			left.setVisibility(View.VISIBLE);
 			center.setVisibility(View.VISIBLE);
 			right.setVisibility(View.VISIBLE);
-			bold.setVisibility(View.VISIBLE);
-			italicize.setVisibility(View.VISIBLE);
-			underline.setVisibility(View.VISIBLE);
 			size.setVisibility(View.VISIBLE);
 			color.setVisibility(View.VISIBLE);
 		}
 	}
-	
+
 	/**
 	 * Following 4 methods sets the highlighter color
 	 * @param view
@@ -389,26 +389,6 @@ public class NewNoteActivity extends Activity {
 	public void alignRight(View view){
 		EditText text = (EditText) findViewById(R.id.notetext);
 		text.setGravity(Gravity.RIGHT);
-	}
-
-
-	public void bold(View view){
-		EditText text = (EditText) findViewById(R.id.notetext);
-		ToggleButton bold = (ToggleButton) findViewById(R.id.bold);
-		ToggleButton italic = (ToggleButton) findViewById(R.id.italic);
-		
-		if(bold.isChecked()){
-			if(italic.isChecked()){
-				text.setTypeface(text.getTypeface(), Typeface.BOLD_ITALIC);
-			}
-			text.setTypeface(text.getTypeface(), Typeface.BOLD);
-		}
-		else{
-			if(italic.isChecked()){
-				text.setTypeface(text.getTypeface(), Typeface.ITALIC);
-			}
-			text.setTypeface(text.getTypeface(), Typeface.NORMAL);
-		}
 	}
 
 }

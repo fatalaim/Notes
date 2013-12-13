@@ -78,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@+string/slidingDrawerButton"
+                android:onClick="drawToggle"
                 android:src="@drawable/arrow" />
 
             <LinearLayout
@@ -90,154 +91,153 @@
                     android:id="@+id/drawToggle"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:background="@android:drawable/btn_default"
+                    android:onClick="drawToggle"
                     android:text="@string/togglebutton"
-                    android:textOff="Draw"
-                    android:textOn="Type"
-                    android:onClick="drawToggle" />
+                    android:textOff="Click to Draw"
+                    android:textOn="Click to Type" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/yellowHigh"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight=".50"
+                        android:contentDescription="@string/yellowHighlighter"
                         android:onClick="highlighterYellow"
-                        android:text="@string/yellowh" />
+                        android:src="@drawable/yellow_highlighter" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/blueHigh"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight=".50"
+                        android:contentDescription="@string/blueHighlighter"
                         android:onClick="highlighterBlue"
-                        android:text="@string/blueh" />
+                        android:src="@drawable/blue_highlighter" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/leftA"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight=".33"
-                        android:text="@string/lefta"
-                        android:onClick="alignLeft"/>
+                        android:contentDescription="@string/leftA"
+                        android:onClick="alignLeft"
+                        android:paddingBottom="3dip"
+                        android:paddingLeft="3dip"
+                        android:paddingRight="3dip"
+                        android:paddingTop="2dip"
+                        android:src="@drawable/align_left" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/center"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight=".33"
-                        android:text="@string/center"
-                        android:onClick="alignCenter" />
+                        android:contentDescription="@string/centerA"
+                        android:onClick="alignCenter"
+                        android:paddingBottom="3dip"
+                        android:paddingLeft="3dip"
+                        android:paddingRight="3dip"
+                        android:paddingTop="2dip"
+                        android:src="@drawable/align_center" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/rightA"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight=".33"
-                        android:text="@string/righta"
-                        android:onClick="alignRight" />
+                        android:contentDescription="@string/rightA"
+                        android:onClick="alignRight"
+                        android:paddingBottom="3dip"
+                        android:paddingLeft="3dip"
+                        android:paddingRight="3dip"
+                        android:paddingTop="2dip"
+                        android:src="@drawable/align_right" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/greenHigh"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight=".50"
+                        android:contentDescription="@string/greenHighlighter"
                         android:onClick="highlighterGreen"
-                        android:text="@string/greenh" />
+                        android:src="@drawable/green_highlighter" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/pinkHigh"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight=".50"
+                        android:contentDescription="@string/pinkHighlighter"
                         android:onClick="highlighterPink"
-                        android:text="@string/pinkh" />
-
-                    <ToggleButton
-                        android:id="@+id/bold"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".33"
-                        android:text="@string/bold"
-                        android:textOn="Bold"
-                        android:textOff="Bold" />
-
-                    <ToggleButton
-                        android:id="@+id/italic"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".33"
-                        android:text="@string/italicize"
-                        android:textOn="Italicize"
-                        android:textOff="Italicize" />
-
-                    <ToggleButton
-                        android:id="@+id/underline"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".33"
-                        android:text="@string/underline"
-                        android:textOn="Under"
-                        android:textOff="Under" />
+                        android:src="@drawable/pink_highlighter" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/blackPen"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight=".50"
+                        android:contentDescription="@string/black_pen"
                         android:onClick="penBlack"
-                        android:text="@string/blackp" />
+                        android:src="@drawable/black_pen" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/bluePen"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight=".50"
+                        android:contentDescription="@string/blue_pen"
                         android:onClick="penBlue"
-                        android:text="@string/bluep" />
+                        android:src="@drawable/blue_pen" />
 
                     <Spinner
                         android:id="@+id/sizeSpinner"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent" />
+                        android:layout_height="fill_parent"
+                        android:entries="@array/size_array"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/redPen"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight=".50"
+                        android:contentDescription="@string/red_pen"
                         android:onClick="penRed"
-                        android:text="@string/redp" />
+                        android:src="@drawable/red_pen" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/greenPen"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight=".50"
+                        android:contentDescription="@string/green_pen"
                         android:onClick="penGreen"
-                        android:text="@string/greenp" />
+                        android:src="@drawable/green_pen" />
 
                     <Spinner
                         android:id="@+id/colorSpinner"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent" />
+                        android:layout_height="fill_parent"
+                        android:entries="@array/color_array"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -249,16 +249,16 @@
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight=".50"
-                        android:text="@string/eraser"
-                        android:onClick="eraser" />
+                        android:onClick="eraser"
+                        android:text="@string/eraser" />
 
                     <Button
                         android:id="@+id/clearButton"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight=".50"
-                        android:text="@string/clear"
-                        android:onClick="clear" />
+                        android:onClick="clear"
+                        android:text="@string/clear" />
                 </LinearLayout>
             </LinearLayout>
         </SlidingDrawer>

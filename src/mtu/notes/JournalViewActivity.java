@@ -90,7 +90,7 @@ public class JournalViewActivity extends Activity {
 	/**
 	 * Create the hashmap with journal names as keys and note names as values
 	 */
-	private void createCollection(){
+	public void createCollection(){
 		journals = new LinkedHashMap<String, List<String>>();
 		for(String journalName : journalList){
 			loadChild(journalName);

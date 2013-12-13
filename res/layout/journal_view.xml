@@ -15,7 +15,8 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight=".60"
-            android:hint="@string/journal_name"/>
+            android:hint="@string/journal_name"
+            />
 
         <Button
             android:id="@+id/addJournal"
