@@ -9,6 +9,7 @@
     <string name="title_activity_journal_view">JournalView</string>
     <string name="title_activity_handnote">HandnoteActivity</string>
     <string name="title_activity_load_scribble">LoadScribble</string>
+    <string name="title_activity_edit_note">EditNoteActivity</string>
     <string name="category">Category</string>
     <string name="addnote">Add Note</string>
     <string name="edittitle">Edit Title</string>
