@@ -48,7 +48,6 @@ public class EditNoteActivity extends Activity{
 				LineNumberReader in = new LineNumberReader(new FileReader(Environment.getExternalStorageDirectory() +"/category.txt"));
 				while((read = in.readLine()) != null)
 				{
-					System.out.println(read);
 					list.add(read);
 				}
 				in.close();
@@ -168,7 +167,6 @@ public class EditNoteActivity extends Activity{
 					success = dir.mkdir();
 				}
 				File file = new File(folder, filename);
-				System.out.println(file.getPath());
 				try {
 					FileOutputStream out = new FileOutputStream(file);
 					out.write(text.getText().toString().getBytes());
