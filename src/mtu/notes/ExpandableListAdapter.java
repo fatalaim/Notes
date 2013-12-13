@@ -2,8 +2,9 @@ package mtu.notes;
 
 import java.util.List;
 
-import java.util.Map;
 
+import java.util.Map;
+import java.io.File;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -82,7 +83,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 		Button delete = (Button) convertView.findViewById(R.id.deleteButton);
 		delete.setOnClickListener(new OnClickListener(){
 			public void onClick(View view){
-				//TODO Delete note here
+				File note = new File(Environment.getExternalStorageDirectory() + "/" + jN + "/" + noteName);
+				if(note.exists()){
+					note.delete();
+				}
+				((JournalViewActivity) context).createCollection();
 			}
 		});
 		
