@@ -118,6 +118,8 @@ public class LoadScribble extends Activity {
 	public void Load(View view)
 	{
 		Spinner note = (Spinner)findViewById(R.id.loadSpinner);
+		if (note.getSelectedItem() == null)
+			return;
 		String _path = path.get(notes.indexOf(note.getSelectedItem().toString()));
 		Intent intent = new Intent(getApplicationContext(), ViewNoteActivity.class);
 		intent.putExtra("path", _path);
